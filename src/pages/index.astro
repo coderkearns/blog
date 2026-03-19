@@ -9,27 +9,32 @@ const posts = (await getCollection("blog")).sort(
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<Base title="Blog">
+<Base title="coderkearns">
+  <section class="home-hero">
+    <h1>hi, i'm coderkearns ✦</h1>
+    <p>writing about code, projects, and things i find interesting.</p>
+  </section>
+
   <section>
-    <h1>Blog</h1>
+    <p class="posts-heading">recent writing</p>
     <ul class="post-list">
       {
         posts.map((post) => (
           <li class="post-item">
             <a href={`${base}/blog/${post.id}/`}>
-              <article>
-                <h2>{post.data.title}</h2>
+              <div class="post-item-meta">
                 <time datetime={post.data.date.toISOString()}>
                   {post.data.date.toLocaleDateString("en-US", {
                     year: "numeric",
-                    month: "long",
+                    month: "short",
                     day: "numeric",
                   })}
                 </time>
-                {post.data.description && (
-                  <p>{post.data.description}</p>
-                )}
-              </article>
+              </div>
+              <p class="post-item-title">{post.data.title}</p>
+              {post.data.description && (
+                <p class="post-item-description">{post.data.description}</p>
+              )}
             </a>
           </li>
         ))
