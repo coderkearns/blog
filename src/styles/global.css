@@ -178,6 +178,18 @@ body {
   color: var(--clr-primary);
 }
 
+.github-link {
+  display: flex;
+  align-items: center;
+  color: var(--clr-text-muted);
+  text-decoration: none;
+  transition: color var(--ease-fast);
+}
+
+.github-link:hover {
+  color: var(--clr-primary);
+}
+
 /* =============================================
    Main & footer
    ============================================= */

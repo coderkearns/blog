@@ -1,0 +1,80 @@
+---
+interface Props {
+  label: string;
+  variant?: "default" | "success" | "warning" | "danger" | "info";
+}
+
+const { label, variant = "default" } = Astro.props;
+---
+
+<span class={`badge badge--${variant}`}>{label}</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2em 0.65em;
+    border-radius: var(--radius-full);
+    border: 1px solid currentColor;
+    line-height: 1.4;
+    vertical-align: middle;
+  }
+
+  .badge--default {
+    color: var(--clr-primary);
+    background-color: var(--clr-primary-subtle);
+    border-color: var(--clr-border-strong);
+  }
+
+  .badge--success {
+    color: #059669;
+    background-color: #ecfdf5;
+    border-color: #6ee7b7;
+  }
+
+  .badge--warning {
+    color: #d97706;
+    background-color: #fffbeb;
+    border-color: #fcd34d;
+  }
+
+  .badge--danger {
+    color: #dc2626;
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+  }
+
+  .badge--info {
+    color: #0284c7;
+    background-color: #f0f9ff;
+    border-color: #7dd3fc;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .badge--success {
+      color: #34d399;
+      background-color: #022c22;
+      border-color: #059669;
+    }
+    .badge--warning {
+      color: #fbbf24;
+      background-color: #1c1300;
+      border-color: #d97706;
+    }
+    .badge--danger {
+      color: #f87171;
+      background-color: #1f0707;
+      border-color: #dc2626;
+    }
+    .badge--info {
+      color: #38bdf8;
+      background-color: #082f49;
+      border-color: #0284c7;
+    }
+  }
+</style>
