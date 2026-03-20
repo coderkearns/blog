@@ -6,6 +6,7 @@ description: "A comprehensive test post covering all Markdown features, code blo
 
 import Callout from "../src/components/Callout.astro";
 import Badge from "../src/components/Badge.astro";
+import GameOfLife from "../src/components/GameOfLife.astro";
 
 This post exists to stress-test the blog's rendering pipeline. It touches every Markdown element, dives deep into code blocks, and exercises both custom Astro components.
 
@@ -245,6 +246,21 @@ The `Callout` component accepts a `type` prop (`note`, `tip`, `warning`, `danger
 <Callout type="danger" title="Do Not Do This">
   This is a **danger** callout. Reserve it for actions that could cause data loss or security issues.
 </Callout>
+
+---
+
+## Interactive Component — Conway's Game of Life
+
+[Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a zero-player cellular automaton devised by mathematician John Conway in 1970. Four rules govern every tick:
+
+1. A live cell with **2 or 3** live neighbours **survives**.
+2. A dead cell with exactly **3** live neighbours **becomes alive**.
+3. A live cell with fewer than 2 or more than 3 neighbours **dies**.
+4. All other dead cells **stay dead**.
+
+From those four lines of logic, remarkably complex, organic-looking patterns emerge. The grid below starts with a **Gosper Glider Gun** — the first pattern ever discovered that grows without bound, continuously firing small five-cell "gliders" across the grid.
+
+<GameOfLife />
 
 ---
 
