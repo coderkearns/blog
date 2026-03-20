@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="A comprehensive test post covering all Markdown features, code blocks, and custom components."><title>Kitchen Sink: Testing All the Features</title><!-- Fonts: Fraunces (headings) · DM Sans (body) · JetBrains Mono (code) --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="/blog/_astro/_slug_.PE1IB6mE.css"><style>.callout[data-astro-cid-mrmim4ef]{border-radius:var(--radius-md);padding:var(--sp-4) var(--sp-5);margin:var(--sp-6) 0;border-left:4px solid}.callout__label[data-astro-cid-mrmim4ef]{font-weight:700;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:var(--sp-2);display:flex;align-items:center;gap:var(--sp-2)}.callout__body[data-astro-cid-mrmim4ef] p:last-child{margin-bottom:0}.callout--note[data-astro-cid-mrmim4ef]{background-color:var(--clr-primary-subtle);border-color:var(--clr-primary-light);color:var(--clr-text)}.callout--note[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:var(--clr-primary)}.callout--tip[data-astro-cid-mrmim4ef]{background-color:#ecfdf5;border-color:#34d399;color:#064e3b}.callout--tip[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#059669}.callout--warning[data-astro-cid-mrmim4ef]{background-color:#fffbeb;border-color:#fbbf24;color:#78350f}.callout--warning[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#d97706}.callout--danger[data-astro-cid-mrmim4ef]{background-color:#fef2f2;border-color:#f87171;color:#7f1d1d}.callout--danger[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#dc2626}@media(prefers-color-scheme:dark){.callout--tip[data-astro-cid-mrmim4ef]{background-color:#022c22;border-color:#059669;color:#a7f3d0}.callout--tip[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#34d399}.callout--warning[data-astro-cid-mrmim4ef]{background-color:#1c1300;border-color:#d97706;color:#fde68a}.callout--warning[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#fbbf24}.callout--danger[data-astro-cid-mrmim4ef]{background-color:#1f0707;border-color:#dc2626;color:#fecaca}.callout--danger[data-astro-cid-mrmim4ef] .callout__label[data-astro-cid-mrmim4ef]{color:#f87171}}
+</style><style>.badge[data-astro-cid-w254wjdn]{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.2em .65em;border-radius:var(--radius-full);border:1px solid currentColor;line-height:1.4;vertical-align:middle}.badge--default[data-astro-cid-w254wjdn]{color:var(--clr-primary);background-color:var(--clr-primary-subtle);border-color:var(--clr-border-strong)}.badge--success[data-astro-cid-w254wjdn]{color:#059669;background-color:#ecfdf5;border-color:#6ee7b7}.badge--warning[data-astro-cid-w254wjdn]{color:#d97706;background-color:#fffbeb;border-color:#fcd34d}.badge--danger[data-astro-cid-w254wjdn]{color:#dc2626;background-color:#fef2f2;border-color:#fca5a5}.badge--info[data-astro-cid-w254wjdn]{color:#0284c7;background-color:#f0f9ff;border-color:#7dd3fc}@media(prefers-color-scheme:dark){.badge--success[data-astro-cid-w254wjdn]{color:#34d399;background-color:#022c22;border-color:#059669}.badge--warning[data-astro-cid-w254wjdn]{color:#fbbf24;background-color:#1c1300;border-color:#d97706}.badge--danger[data-astro-cid-w254wjdn]{color:#f87171;background-color:#1f0707;border-color:#dc2626}.badge--info[data-astro-cid-w254wjdn]{color:#38bdf8;background-color:#082f49;border-color:#0284c7}}
+</style><style>.gol-wrapper[data-astro-cid-ymktheml]{margin:var(--sp-6) 0;border:1px solid var(--clr-border);border-radius:var(--radius-lg);overflow:hidden;background-color:var(--clr-bg-surface)}.gol-toolbar[data-astro-cid-ymktheml]{display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-2);padding:var(--sp-3) var(--sp-4);border-bottom:1px solid var(--clr-border);background-color:var(--clr-bg-surface)}.gol-btn[data-astro-cid-ymktheml]{display:inline-flex;align-items:center;gap:.4em;padding:.35em .85em;font-family:var(--font-body);font-size:.8125rem;font-weight:600;border-radius:var(--radius-sm);border:1px solid var(--clr-border-strong);background-color:var(--clr-bg);color:var(--clr-text-body);cursor:pointer;transition:background-color var(--ease-fast),border-color var(--ease-fast),color var(--ease-fast);line-height:1.4}.gol-btn[data-astro-cid-ymktheml]:hover{background-color:var(--clr-bg-surface-hover);border-color:var(--clr-primary-light);color:var(--clr-primary)}.gol-btn--primary[data-astro-cid-ymktheml]{background-color:var(--clr-primary);border-color:var(--clr-primary);color:#fff}.gol-btn--primary[data-astro-cid-ymktheml]:hover{background-color:var(--clr-primary-hover);border-color:var(--clr-primary-hover);color:#fff}.gol-stat[data-astro-cid-ymktheml]{margin-left:auto;font-family:var(--font-mono);font-size:.775rem;color:var(--clr-text-muted);white-space:nowrap}.gol-stat[data-astro-cid-ymktheml] strong[data-astro-cid-ymktheml]{color:var(--clr-primary)}.gol-canvas-wrap[data-astro-cid-ymktheml]{line-height:0;cursor:crosshair}#gol-canvas[data-astro-cid-ymktheml]{display:block;width:100%;touch-action:none}.gol-hint[data-astro-cid-ymktheml]{padding:var(--sp-2) var(--sp-4);font-size:.775rem;color:var(--clr-text-muted);border-top:1px solid var(--clr-border);margin:0}
+</style></head> <body> <header class="site-header"> <nav class="site-nav"> <a href="/blog/" class="site-name">coderkearns</a> <div class="nav-links"> <a href="https://github.com/coderkearns" class="github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"> <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"> <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"></path> </svg> </a> </div> </nav> </header> <main>  <article> <header class="post-header"> <h1>Kitchen Sink: Testing All the Features</h1> <time datetime="2026-03-20T00:00:00.000Z">March 19, 2026</time> <p class="post-description">A comprehensive test post covering all Markdown features, code blocks, and custom components.</p> </header> <div class="post-content">  <p>This post exists to stress-test the blog’s rendering pipeline. It touches every Markdown element, dives deep into code blocks, and exercises both custom Astro components.</p>
+<hr/>
+<h2 id="typography--inline-formatting">Typography &amp; Inline Formatting</h2>
+<p>Here is a paragraph with <strong>bold text</strong>, <em>italic text</em>, <del>strikethrough</del>, and <code>inline code</code>. You can also combine them: <strong><em>bold italic</em></strong> and <strong><code>bold code</code></strong>.</p>
+<p>Here is a <a href="https://docs.astro.build">link to Astro’s docs</a> and an <a href="https://github.com">external link</a> that opens in context.</p>
+<p>Superscript and subscript aren’t native Markdown, but everything else is covered below.</p>
+<hr/>
+<h2 id="headings">Headings</h2>
+<h1 id="heading-1">Heading 1</h1>
+<h2 id="heading-2">Heading 2</h2>
+<h3 id="heading-3">Heading 3</h3>
+<h4 id="heading-4">Heading 4</h4>
+<h5 id="heading-5">Heading 5</h5>
+<h6 id="heading-6">Heading 6</h6>
+<hr/>
+<h2 id="lists">Lists</h2>
+<h3 id="unordered">Unordered</h3>
+<ul>
+<li>Item one</li>
+<li>Item two
+<ul>
+<li>Nested item A</li>
+<li>Nested item B
+<ul>
+<li>Doubly nested</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Item three</li>
+</ul>
+<h3 id="ordered">Ordered</h3>
+<ol>
+<li>First step</li>
+<li>Second step
+<ol>
+<li>Sub-step 2a</li>
+<li>Sub-step 2b</li>
+</ol>
+</li>
+<li>Third step</li>
+</ol>
+<h3 id="task-list">Task List</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled/> Set up the blog</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> Write the first post</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Add dark mode toggle</li>
+<li class="task-list-item"><input type="checkbox" disabled/> Ship to production</li>
+</ul>
+<hr/>
+<h2 id="blockquotes">Blockquotes</h2>
+<blockquote>
+<p>“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
+<p>— Harold Abelson, <em>SICP</em></p>
+</blockquote>
+<p>Nested blockquote:</p>
+<blockquote>
+<p>Outer quote.</p>
+<blockquote>
+<p>Inner quote, going deeper.</p>
+</blockquote>
+</blockquote>
+<hr/>
+<h2 id="tables">Tables</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Feature</th><th style="text-align:center">Supported</th><th>Notes</th></tr></thead><tbody><tr><td>Bold / Italic</td><td style="text-align:center">✓</td><td>Standard CommonMark</td></tr><tr><td>Tables</td><td style="text-align:center">✓</td><td>GFM extension</td></tr><tr><td>Code blocks</td><td style="text-align:center">✓</td><td>Shiki syntax highlighting</td></tr><tr><td>Custom components</td><td style="text-align:center">✓</td><td>MDX power feature</td></tr><tr><td>Task lists</td><td style="text-align:center">✓</td><td>GFM extension</td></tr></tbody></table>
+<hr/>
+<h2 id="horizontal-rule">Horizontal Rule</h2>
+<p>Three ways to write it, same result:</p>
+<hr/>
+<hr/>
+<hr/>
+<h2 id="images">Images</h2>
+<p><img src="https://placehold.co/800x400/7c3aed/faf8ff?text=Kitchen+Sink" alt="A purple placeholder"/></p>
+<hr/>
+<h2 id="code-blocks">Code Blocks</h2>
+<h3 id="inline-code">Inline code</h3>
+<p>Use <code>const x = 42;</code> for a quick reference without a full block.</p>
+<h3 id="javascript">JavaScript</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// Arrow function with default parameter</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#B392F0"> greet</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">name</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &quot;world&quot;</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=&gt;</span><span style="color:#9ECBFF"> `Hello, ${</span><span style="color:#E1E4E8">name</span><span style="color:#9ECBFF">}!`</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">greet</span><span style="color:#E1E4E8">());          </span><span style="color:#6A737D">// Hello, world!</span></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">greet</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Astro&quot;</span><span style="color:#E1E4E8">));   </span><span style="color:#6A737D">// Hello, Astro!</span></span></code></pre>
+<h3 id="typescript">TypeScript</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">interface</span><span style="color:#B392F0"> Post</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  title</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#FFAB70">  date</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#FFAB70">  description</span><span style="color:#F97583">?:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#FFAB70">  tags</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">[];</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> formatDate</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">date</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> date.</span><span style="color:#B392F0">toLocaleDateString</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;en-US&quot;</span><span style="color:#E1E4E8">, {</span></span>
+<span class="line"><span style="color:#E1E4E8">    year: </span><span style="color:#9ECBFF">&quot;numeric&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    month: </span><span style="color:#9ECBFF">&quot;long&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    day: </span><span style="color:#9ECBFF">&quot;numeric&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> post</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Post</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  title: </span><span style="color:#9ECBFF">&quot;Kitchen Sink&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  date: </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;2026-03-20&quot;</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">  tags: [</span><span style="color:#9ECBFF">&quot;meta&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;test&quot;</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">formatDate</span><span style="color:#E1E4E8">(post.date)); </span><span style="color:#6A737D">// March 20, 2026</span></span></code></pre>
+<h3 id="python">Python</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> dataclasses </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> dataclass, field</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> datetime </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> date</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@dataclass</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Post</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">    title: </span><span style="color:#79B8FF">str</span></span>
+<span class="line"><span style="color:#E1E4E8">    published: date</span></span>
+<span class="line"><span style="color:#E1E4E8">    tags: list[</span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> field(</span><span style="color:#FFAB70">default_factory</span><span style="color:#F97583">=</span><span style="color:#79B8FF">list</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> summary</span><span style="color:#E1E4E8">(self) -&gt; </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">        tag_str </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &quot;, &quot;</span><span style="color:#E1E4E8">.join(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.tags) </span><span style="color:#F97583">if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.tags </span><span style="color:#F97583">else</span><span style="color:#9ECBFF"> &quot;none&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#F97583"> f</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">{self</span><span style="color:#E1E4E8">.title</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF"> (</span><span style="color:#79B8FF">{self</span><span style="color:#E1E4E8">.published</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">) — tags: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">tag_str</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">post </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Post(</span><span style="color:#9ECBFF">&quot;Kitchen Sink&quot;</span><span style="color:#E1E4E8">, date(</span><span style="color:#79B8FF">2026</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">), [</span><span style="color:#9ECBFF">&quot;meta&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;test&quot;</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(post.summary())</span></span>
+<span class="line"><span style="color:#6A737D"># Kitchen Sink (2026-03-20) — tags: meta, test</span></span></code></pre>
+<h3 id="shell--bash">Shell / Bash</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D"># Install dependencies and start dev server</span></span>
+<span class="line"><span style="color:#B392F0">pnpm</span><span style="color:#9ECBFF"> install</span></span>
+<span class="line"><span style="color:#B392F0">pnpm</span><span style="color:#9ECBFF"> dev</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Build for production</span></span>
+<span class="line"><span style="color:#B392F0">pnpm</span><span style="color:#9ECBFF"> build</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># Deploy to GitHub Pages</span></span>
+<span class="line"><span style="color:#B392F0">pnpm</span><span style="color:#9ECBFF"> deploy</span></span></code></pre>
+<h3 id="css">CSS</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="css"><code><span class="line"><span style="color:#B392F0">.site-header</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#79B8FF">  padding</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--sp-5</span><span style="color:#E1E4E8">) </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  border-bottom</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">2</span><span style="color:#F97583">px</span><span style="color:#79B8FF"> solid</span><span style="color:#79B8FF"> transparent</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  background-image</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">var</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">--gradient-accent</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#79B8FF">  background-size</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">100</span><span style="color:#F97583">%</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583">px</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  background-position</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">bottom</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#79B8FF">  background-repeat</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">no-repeat</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="json">JSON</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;name&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;blog&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;type&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;module&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">  &quot;scripts&quot;</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    &quot;dev&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;astro dev&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    &quot;build&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;astro build&quot;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    &quot;deploy&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;astro build &amp;&amp; gh-pages -d dist&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="astro--jsx-like-template">Astro / JSX-like template</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="astro"><code><span class="line"><span style="color:#6A737D">---</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">title</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">date</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> Astro.props;</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> formatted</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> date.</span><span style="color:#B392F0">toLocaleDateString</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;en-US&quot;</span><span style="color:#E1E4E8">, { dateStyle: </span><span style="color:#9ECBFF">&quot;long&quot;</span><span style="color:#E1E4E8"> });</span></span>
+<span class="line"><span style="color:#6A737D">---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&lt;</span><span style="color:#85E89D">article</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">&gt;{title}&lt;/</span><span style="color:#85E89D">h1</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">time</span><span style="color:#B392F0"> datetime</span><span style="color:#E1E4E8">={date.</span><span style="color:#B392F0">toISOString</span><span style="color:#E1E4E8">()}&gt;{formatted}&lt;/</span><span style="color:#85E89D">time</span><span style="color:#E1E4E8">&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">  &lt;</span><span style="color:#85E89D">slot</span><span style="color:#E1E4E8"> /&gt;</span></span>
+<span class="line"><span style="color:#E1E4E8">&lt;/</span><span style="color:#85E89D">article</span><span style="color:#E1E4E8">&gt;</span></span></code></pre>
+<hr/>
+<h2 id="custom-component--callout">Custom Component — Callout</h2>
+<p>The <code>Callout</code> component accepts a <code>type</code> prop (<code>note</code>, <code>tip</code>, <code>warning</code>, <code>danger</code>) and an optional <code>title</code> override.</p>
+<aside class="callout callout--note" data-astro-cid-mrmim4ef> <p class="callout__label" data-astro-cid-mrmim4ef> <span aria-hidden="true" data-astro-cid-mrmim4ef>ℹ</span> Note </p> <div class="callout__body" data-astro-cid-mrmim4ef> <p>This is a <strong>note</strong> callout. Use it for general information the reader should keep in mind.</p> </div> </aside> 
+<aside class="callout callout--tip" data-astro-cid-mrmim4ef> <p class="callout__label" data-astro-cid-mrmim4ef> <span aria-hidden="true" data-astro-cid-mrmim4ef>💡</span> Pro Tip </p> <div class="callout__body" data-astro-cid-mrmim4ef> <p>You can nest <em>Markdown</em> inside a callout body. Bold, italic, <code>inline code</code>, and even <a href="https://astro.build">links</a> all work.</p> </div> </aside> 
+<aside class="callout callout--warning" data-astro-cid-mrmim4ef> <p class="callout__label" data-astro-cid-mrmim4ef> <span aria-hidden="true" data-astro-cid-mrmim4ef>⚠</span> Warning </p> <div class="callout__body" data-astro-cid-mrmim4ef> <p>Watch out! This is a <strong>warning</strong> callout. It uses amber tones to signal caution.</p> </div> </aside> 
+<aside class="callout callout--danger" data-astro-cid-mrmim4ef> <p class="callout__label" data-astro-cid-mrmim4ef> <span aria-hidden="true" data-astro-cid-mrmim4ef>🚨</span> Do Not Do This </p> <div class="callout__body" data-astro-cid-mrmim4ef> <p>This is a <strong>danger</strong> callout. Reserve it for actions that could cause data loss or security issues.</p> </div> </aside> 
+<hr/>
+<h2 id="interactive-component--conways-game-of-life">Interactive Component — Conway’s Game of Life</h2>
+<p><a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway’s Game of Life</a> is a zero-player cellular automaton devised by mathematician John Conway in 1970. Four rules govern every tick:</p>
+<ol>
+<li>A live cell with <strong>2 or 3</strong> live neighbours <strong>survives</strong>.</li>
+<li>A dead cell with exactly <strong>3</strong> live neighbours <strong>becomes alive</strong>.</li>
+<li>A live cell with fewer than 2 or more than 3 neighbours <strong>dies</strong>.</li>
+<li>All other dead cells <strong>stay dead</strong>.</li>
+</ol>
+<p>From those four lines of logic, remarkably complex, organic-looking patterns emerge. The grid below starts with a <strong>Gosper Glider Gun</strong> — the first pattern ever discovered that grows without bound, continuously firing small five-cell “gliders” across the grid.</p>
+<div class="gol-wrapper" data-astro-cid-ymktheml> <div class="gol-toolbar" data-astro-cid-ymktheml> <button id="gol-play" class="gol-btn gol-btn--primary" aria-label="Play" data-astro-cid-ymktheml> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" data-astro-cid-ymktheml> <polygon points="2,1 13,7 2,13" data-astro-cid-ymktheml></polygon> </svg>
+Play
+</button> <button id="gol-pause" class="gol-btn" aria-label="Pause" hidden data-astro-cid-ymktheml> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" data-astro-cid-ymktheml> <rect x="2" y="1" width="4" height="12" rx="1" data-astro-cid-ymktheml></rect> <rect x="8" y="1" width="4" height="12" rx="1" data-astro-cid-ymktheml></rect> </svg>
+Pause
+</button> <button id="gol-step" class="gol-btn" aria-label="Step" data-astro-cid-ymktheml> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" data-astro-cid-ymktheml> <polygon points="1,1 10,7 1,13" data-astro-cid-ymktheml></polygon> <rect x="11" y="1" width="2" height="12" rx="1" data-astro-cid-ymktheml></rect> </svg>
+Step
+</button> <button id="gol-clear" class="gol-btn" aria-label="Clear" data-astro-cid-ymktheml> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" data-astro-cid-ymktheml> <path d="M2 3h10M5 3V2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1M3 3l.7 8.1A1 1 0 0 0 4.7 12h4.6a1 1 0 0 0 1-.9L11 3" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" data-astro-cid-ymktheml></path> </svg>
+Clear
+</button> <button id="gol-random" class="gol-btn" aria-label="Randomise" data-astro-cid-ymktheml> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" data-astro-cid-ymktheml> <path d="M1 4h3l1.5 2L4 8H1M9 4h1.5l2.5 3-2.5 3H9M6 4l1 1.5M6 10l1-1.5" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-ymktheml></path> </svg>
+Random
+</button> <span class="gol-stat" data-astro-cid-ymktheml>
+Gen <strong id="gol-gen" data-astro-cid-ymktheml>0</strong>
+&nbsp;·&nbsp;
+      Alive <strong id="gol-alive" data-astro-cid-ymktheml>0</strong> </span> </div> <div class="gol-canvas-wrap" data-astro-cid-ymktheml> <canvas id="gol-canvas" role="img" aria-label="Conway's Game of Life grid — click or drag to draw cells" data-astro-cid-ymktheml></canvas> </div> <p class="gol-hint" data-astro-cid-ymktheml>Click or drag on the grid to draw cells, then press <strong data-astro-cid-ymktheml>Play</strong>.</p> </div>  <script type="module">(()=>{const i=document.getElementById("gol-canvas"),l=i.getContext("2d"),y=document.getElementById("gol-play"),S=document.getElementById("gol-pause"),R=document.getElementById("gol-step"),F=document.getElementById("gol-clear"),W=document.getElementById("gol-random"),Y=document.getElementById("gol-gen"),V=document.getElementById("gol-alive");let r,a,c,L,m=0,E=!1,b=0,w=0;function k(){const t=i.parentElement.clientWidth,e=Math.round(t*.46);i.width=t,i.height=e,r=Math.floor(t/14),a=Math.floor(e/14),c=new Uint8Array(r*a),L=new Uint8Array(r*a),m=0,g(),u()}const f=(t,e)=>e*r+t;function A(){L.fill(0);let t=0;for(let e=0;e<a;e++)for(let n=0;n<r;n++){let s=0;for(let d=-1;d<=1;d++)for(let v=-1;v<=1;v++){if(d===0&&v===0)continue;const z=(e+d+a)%a,D=(n+v+r)%r;s+=c[f(D,z)]}const o=c[f(n,e)]&&s===2||s===3;L[f(n,e)]=o?1:0,o&&t++}[c,L]=[L,c],m++,g(t)}function I(t){return getComputedStyle(document.documentElement).getPropertyValue(t).trim()}function u(){const t=i.width,e=i.height,n=I("--clr-bg-surface")||"#f0ebff",s=I("--clr-primary")||"#7c3aed",C=I("--clr-border")||"#e0d7ff";l.fillStyle=n,l.fillRect(0,0,t,e),l.strokeStyle=C,l.lineWidth=.5,l.globalAlpha=.6;for(let o=0;o<=r;o++)l.beginPath(),l.moveTo(o*14,0),l.lineTo(o*14,e),l.stroke();for(let o=0;o<=a;o++)l.beginPath(),l.moveTo(0,o*14),l.lineTo(t,o*14),l.stroke();l.globalAlpha=1,l.fillStyle=s;for(let o=0;o<a;o++)for(let d=0;d<r;d++)c[f(d,o)]&&l.fillRect(d*14+1,o*14+1,12,12)}function g(t){if(Y.textContent=String(m),t===void 0){let e=0;for(let n=0;n<c.length;n++)e+=c[n];t=e}V.textContent=String(t)}function B(t){E&&(t-w>=1e3/12&&(A(),u(),w=t),b=requestAnimationFrame(B))}function P(){E||(E=!0,y.hidden=!0,S.hidden=!1,w=performance.now(),b=requestAnimationFrame(B))}function h(){E=!1,cancelAnimationFrame(b),y.hidden=!1,S.hidden=!0}let p=!1,T=1;function x(t){const e=i.getBoundingClientRect(),n=i.width/e.width,s=i.height/e.height,C=Math.floor((t.clientX-e.left)*n/14),o=Math.floor((t.clientY-e.top)*s/14);return[C,o]}function M(t){const[e,n]=x(t);e<0||e>=r||n<0||n>=a||(c[f(e,n)]=T,g(),u())}i.addEventListener("pointerdown",t=>{p=!0,i.setPointerCapture(t.pointerId);const[e,n]=x(t);e>=0&&e<r&&n>=0&&n<a&&(T=c[f(e,n)]?0:1),M(t)}),i.addEventListener("pointermove",t=>{p&&M(t)}),i.addEventListener("pointerup",()=>{p=!1}),i.addEventListener("pointercancel",()=>{p=!1}),y.addEventListener("click",P),S.addEventListener("click",h),R.addEventListener("click",()=>{h(),A(),u()}),F.addEventListener("click",()=>{h(),c.fill(0),m=0,g(),u()}),W.addEventListener("click",()=>{h();for(let t=0;t<c.length;t++)c[t]=Math.random()<.28?1:0;m=0,g(),u()}),window.addEventListener("resize",()=>{const t=E;h(),k(),t&&P()}),k();const q=[[1,5],[1,6],[2,5],[2,6],[11,5],[11,6],[11,7],[12,4],[12,8],[13,3],[13,9],[14,3],[14,9],[15,6],[16,4],[16,8],[17,5],[17,6],[17,7],[18,6],[21,3],[21,4],[21,5],[22,3],[22,4],[22,5],[23,2],[23,6],[25,1],[25,2],[25,6],[25,7],[35,3],[35,4],[36,3],[36,4]];for(const[t,e]of q)t<r&&e<a&&(c[f(t,e)]=1);g(),u()})();</script>
+<hr/>
+<h2 id="custom-component-with-custom-css--badge">Custom Component with Custom CSS — Badge</h2>
+<p><code>Badge</code> is a pure CSS component with scoped styles baked in. It renders a small pill label inline.</p>
+<p>Statuses: <span class="badge badge--success" data-astro-cid-w254wjdn>stable</span>  <span class="badge badge--warning" data-astro-cid-w254wjdn>beta</span>  <span class="badge badge--danger" data-astro-cid-w254wjdn>deprecated</span>  <span class="badge badge--info" data-astro-cid-w254wjdn>new</span>  <span class="badge badge--default" data-astro-cid-w254wjdn>default</span> </p>
+<p>You can drop badges into prose too. The API surface is <span class="badge badge--info" data-astro-cid-w254wjdn>v1.0</span>  and the current build is <span class="badge badge--success" data-astro-cid-w254wjdn>passing</span> .</p>
+<hr/>
+<h2 id="putting-it-all-together">Putting It All Together</h2>
+<aside class="callout callout--tip" data-astro-cid-mrmim4ef> <p class="callout__label" data-astro-cid-mrmim4ef> <span aria-hidden="true" data-astro-cid-mrmim4ef>💡</span> Summary </p> <div class="callout__body" data-astro-cid-mrmim4ef> <p>Every element above — headings, lists, tables, blockquotes, code blocks, images, inline formatting, task lists, and both custom components — renders without any global CSS changes. The <code>Callout</code> component uses design tokens from <code>global.css</code>, while <code>Badge</code> ships its own fully scoped styles.</p> </div> </aside> 
+<p>That’s the kitchen sink. If something looks broken, this is the place to debug it.</p>  </div> </article>  </main> <footer class="site-footer"> <span>© 2026 coderkearns</span> </footer> </body></html>
