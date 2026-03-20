@@ -7,4 +7,9 @@ export default defineConfig({
   integrations: [mdx()],
   site: "https://coderkearns.github.io",
   base: "/blog",
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+    },
+  },
 });
