@@ -1,28 +1,28 @@
 /* =============================================
-   Design Tokens — modify these to retheme!
+   Design Tokens — Dracula theme
    ============================================= */
 :root {
-  /* --- Color palette (purple · peach · mint · gold · lilac) --- */
-  --clr-bg: #fdf8f4;           /* warm peach-white */
-  --clr-bg-surface: #f4eeff;   /* soft lilac */
-  --clr-bg-surface-hover: #ebe0ff; /* deeper lilac */
-  --clr-bg-code: #180f2a;      /* deep purple-dark */
+  /* --- Dracula Light color palette --- */
+  --clr-bg: #f8f8f2;
+  --clr-bg-surface: #eeeeea;
+  --clr-bg-surface-hover: #e2e2d8;
+  --clr-bg-code: #282a36;
 
-  --clr-text: #2a1848;         /* deep purple */
-  --clr-text-body: #4a3068;    /* medium purple */
-  --clr-text-muted: #9080b8;   /* muted lilac */
-  --clr-text-code: #f0e8ff;    /* soft lilac-white */
+  --clr-text: #282a36;
+  --clr-text-body: #44475a;
+  --clr-text-muted: #6272a4;
+  --clr-text-code: #f8f8f2;
 
-  --clr-primary: #7c52b8;      /* purple */
-  --clr-primary-hover: #5e3898; /* deeper purple */
-  --clr-primary-light: #c4a8e8; /* lilac */
-  --clr-primary-subtle: #f2ecff; /* very soft lilac */
+  --clr-primary: #6d5b9c;
+  --clr-primary-hover: #5a4a82;
+  --clr-primary-light: #bd93f9;
+  --clr-primary-subtle: #f0ecff;
 
-  --clr-border: #aadece;       /* soft mint */
-  --clr-border-strong: #72c4ae; /* mint */
+  --clr-border: #d8d8d0;
+  --clr-border-strong: #b0a8c8;
 
-  /* purple → peach → gold */
-  --gradient-accent: linear-gradient(90deg, #7c52b8 0%, #f0a070 55%, #f5c040 100%);
+  /* Dracula: purple → pink → cyan */
+  --gradient-accent: linear-gradient(90deg, #bd93f9 0%, #ff79c6 55%, #8be9fd 100%);
 
   /* --- Typography --- */
   --font-heading: "Nunito", system-ui, sans-serif;
@@ -48,12 +48,12 @@
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* --- Shadows (tinted violet) --- */
-  --shadow-sm: 0 1px 3px rgba(120, 70, 180, 0.08),
-    0 1px 2px rgba(120, 70, 180, 0.05);
-  --shadow-md: 0 4px 14px rgba(120, 70, 180, 0.12),
-    0 2px 6px rgba(120, 70, 180, 0.07);
-  --shadow-lg: 0 10px 30px rgba(120, 70, 180, 0.16);
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 3px rgba(109, 91, 156, 0.10),
+    0 1px 2px rgba(109, 91, 156, 0.06);
+  --shadow-md: 0 4px 14px rgba(109, 91, 156, 0.14),
+    0 2px 6px rgba(109, 91, 156, 0.08);
+  --shadow-lg: 0 10px 30px rgba(109, 91, 156, 0.18);
 
   /* --- Transitions --- */
   --ease-fast: 150ms ease;
@@ -63,29 +63,29 @@
   --content-width: 48rem;
 }
 
-/* Dark mode — deep purple night with warm accents */
+/* Dracula Dark */
 html[data-theme="dark"] {
-  --clr-bg: #150f22;           /* deep purple-dark */
-  --clr-bg-surface: #1e1530;   /* slightly lighter */
-  --clr-bg-surface-hover: #281e40;
-  --clr-bg-code: #0e0918;
+  --clr-bg: #282a36;
+  --clr-bg-surface: #44475a;
+  --clr-bg-surface-hover: #4f5269;
+  --clr-bg-code: #1e1f29;
 
-  --clr-text: #f0e8ff;         /* soft lilac-white */
-  --clr-text-body: #d4c4f0;    /* lilac */
-  --clr-text-muted: #9880c0;   /* muted purple */
-  --clr-text-code: #f0e8ff;
+  --clr-text: #f8f8f2;
+  --clr-text-body: #f8f8f2;
+  --clr-text-muted: #6272a4;
+  --clr-text-code: #f8f8f2;
 
-  --clr-primary: #c4a8e8;      /* lilac */
-  --clr-primary-hover: #d8c0f8;
-  --clr-primary-light: #9060d0; /* purple */
-  --clr-primary-subtle: #2a1848;
+  --clr-primary: #bd93f9;
+  --clr-primary-hover: #caa8ff;
+  --clr-primary-light: #ff79c6;
+  --clr-primary-subtle: #383a4a;
 
-  --clr-border: #1e3830;       /* dark mint */
-  --clr-border-strong: #2e5848; /* richer dark mint */
+  --clr-border: #44475a;
+  --clr-border-strong: #6272a4;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
 /* =============================================
@@ -276,18 +276,13 @@ li {
 }
 
 blockquote {
-  border-left: 3px solid #f0a070;
+  border-left: 3px solid var(--clr-primary-light);
   padding: var(--sp-3) var(--sp-5);
   margin: var(--sp-6) 0;
-  background-color: #fef3ec;
+  background-color: var(--clr-primary-subtle);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-style: italic;
   color: var(--clr-text);
-}
-
-html[data-theme="dark"] blockquote {
-  background-color: #2a1a10;
-  border-left-color: #c07050;
 }
 
 blockquote p:last-child {
@@ -448,17 +443,11 @@ th {
   font-size: var(--text-xs, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #7a5800;
-  background-color: #fef3c0;
+  color: var(--clr-primary);
+  background-color: var(--clr-primary-subtle);
   padding: 0.2em 0.75em;
   border-radius: var(--radius-full);
-  border: 1px solid #f5c040;
-}
-
-html[data-theme="dark"] .post-item time {
-  color: #f5c040;
-  background-color: #2a2000;
-  border-color: #7a5800;
+  border: 1px solid var(--clr-primary-light);
 }
 
 .post-item-description {
@@ -488,17 +477,11 @@ html[data-theme="dark"] .post-item time {
   font-size: var(--text-xs, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #7a5800;
-  background-color: #fef3c0;
+  color: var(--clr-primary);
+  background-color: var(--clr-primary-subtle);
   padding: 0.2em 0.75em;
   border-radius: var(--radius-full);
-  border: 1px solid #f5c040;
-}
-
-html[data-theme="dark"] .post-header time {
-  color: #f5c040;
-  background-color: #2a2000;
-  border-color: #7a5800;
+  border: 1px solid var(--clr-primary-light);
 }
 
 .post-description {
@@ -523,20 +506,19 @@ html[data-theme="dark"] .post-header time {
    Theme toggle button
    ============================================= */
 .theme-toggle {
-  font-family: var(--font-body);
-  font-size: var(--text-xs, 0.75rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
   color: var(--clr-text-muted);
   background: var(--clr-bg-surface);
   border: 1px solid var(--clr-border-strong);
   border-radius: var(--radius-full);
-  padding: 0.3em 0.9em;
   cursor: pointer;
   transition: color var(--ease-fast), background-color var(--ease-fast),
     border-color var(--ease-fast);
-  line-height: 1.6;
 }
 
 .theme-toggle:hover {
@@ -544,3 +526,10 @@ html[data-theme="dark"] .post-header time {
   background-color: var(--clr-primary-subtle);
   border-color: var(--clr-primary-light);
 }
+
+/* Show moon in light mode, sun in dark mode */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
