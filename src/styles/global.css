@@ -2,31 +2,31 @@
    Design Tokens — modify these to retheme!
    ============================================= */
 :root {
-  /* --- Color palette (purple / lavender vibes) --- */
-  --clr-bg: #faf8ff;
-  --clr-bg-surface: #f0ebff;
-  --clr-bg-surface-hover: #e6deff;
-  --clr-bg-code: #180d2e;
+  /* --- Color palette (purple · peach · mint · gold · lilac) --- */
+  --clr-bg: #fdf8f4;           /* warm peach-white */
+  --clr-bg-surface: #f4eeff;   /* soft lilac */
+  --clr-bg-surface-hover: #ebe0ff; /* deeper lilac */
+  --clr-bg-code: #180f2a;      /* deep purple-dark */
 
-  --clr-text: #1e0a3c;
-  --clr-text-body: #3b2166;
-  --clr-text-muted: #8b7aaa;
-  --clr-text-code: #e8d9ff;
+  --clr-text: #2a1848;         /* deep purple */
+  --clr-text-body: #4a3068;    /* medium purple */
+  --clr-text-muted: #9080b8;   /* muted lilac */
+  --clr-text-code: #f0e8ff;    /* soft lilac-white */
 
-  --clr-primary: #7c3aed;
-  --clr-primary-hover: #5b21b6;
-  --clr-primary-light: #a78bfa;
-  --clr-primary-subtle: #ede9fe;
+  --clr-primary: #7c52b8;      /* purple */
+  --clr-primary-hover: #5e3898; /* deeper purple */
+  --clr-primary-light: #c4a8e8; /* lilac */
+  --clr-primary-subtle: #f2ecff; /* very soft lilac */
 
-  --clr-border: #e0d7ff;
-  --clr-border-strong: #c4b5fd;
+  --clr-border: #aadece;       /* soft mint */
+  --clr-border-strong: #72c4ae; /* mint */
 
-  /* Gradient used for decorative accents */
-  --gradient-accent: linear-gradient(90deg, #7c3aed 0%, #c084fc 60%, #f472b6 100%);
+  /* purple → peach → gold */
+  --gradient-accent: linear-gradient(90deg, #7c52b8 0%, #f0a070 55%, #f5c040 100%);
 
   /* --- Typography --- */
-  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Nunito", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
 
   /* --- Spacing scale --- */
@@ -48,12 +48,12 @@
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* --- Shadows (tinted purple) --- */
-  --shadow-sm: 0 1px 3px rgba(109, 40, 217, 0.08),
-    0 1px 2px rgba(109, 40, 217, 0.05);
-  --shadow-md: 0 4px 14px rgba(109, 40, 217, 0.12),
-    0 2px 6px rgba(109, 40, 217, 0.07);
-  --shadow-lg: 0 10px 30px rgba(109, 40, 217, 0.16);
+  /* --- Shadows (tinted violet) --- */
+  --shadow-sm: 0 1px 3px rgba(120, 70, 180, 0.08),
+    0 1px 2px rgba(120, 70, 180, 0.05);
+  --shadow-md: 0 4px 14px rgba(120, 70, 180, 0.12),
+    0 2px 6px rgba(120, 70, 180, 0.07);
+  --shadow-lg: 0 10px 30px rgba(120, 70, 180, 0.16);
 
   /* --- Transitions --- */
   --ease-fast: 150ms ease;
@@ -63,31 +63,29 @@
   --content-width: 48rem;
 }
 
-/* Dark mode — deeper purple palette */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --clr-bg: #100820;
-    --clr-bg-surface: #1a0f30;
-    --clr-bg-surface-hover: #241540;
-    --clr-bg-code: #0c0618;
+/* Dark mode — deep purple night with warm accents */
+html[data-theme="dark"] {
+  --clr-bg: #150f22;           /* deep purple-dark */
+  --clr-bg-surface: #1e1530;   /* slightly lighter */
+  --clr-bg-surface-hover: #281e40;
+  --clr-bg-code: #0e0918;
 
-    --clr-text: #f0e8ff;
-    --clr-text-body: #d4c4f0;
-    --clr-text-muted: #9b8cc0;
-    --clr-text-code: #e8d9ff;
+  --clr-text: #f0e8ff;         /* soft lilac-white */
+  --clr-text-body: #d4c4f0;    /* lilac */
+  --clr-text-muted: #9880c0;   /* muted purple */
+  --clr-text-code: #f0e8ff;
 
-    --clr-primary: #a78bfa;
-    --clr-primary-hover: #c4b5fd;
-    --clr-primary-light: #7c3aed;
-    --clr-primary-subtle: #2e1b55;
+  --clr-primary: #c4a8e8;      /* lilac */
+  --clr-primary-hover: #d8c0f8;
+  --clr-primary-light: #9060d0; /* purple */
+  --clr-primary-subtle: #2a1848;
 
-    --clr-border: #2e1b55;
-    --clr-border-strong: #4a2e82;
+  --clr-border: #1e3830;       /* dark mint */
+  --clr-border-strong: #2e5848; /* richer dark mint */
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
-  }
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* =============================================
@@ -278,13 +276,18 @@ li {
 }
 
 blockquote {
-  border-left: 3px solid var(--clr-primary-light);
+  border-left: 3px solid #f0a070;
   padding: var(--sp-3) var(--sp-5);
   margin: var(--sp-6) 0;
-  background-color: var(--clr-primary-subtle);
+  background-color: #fef3ec;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-style: italic;
   color: var(--clr-text);
+}
+
+html[data-theme="dark"] blockquote {
+  background-color: #2a1a10;
+  border-left-color: #c07050;
 }
 
 blockquote p:last-child {
@@ -445,11 +448,17 @@ th {
   font-size: var(--text-xs, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--clr-primary);
-  background-color: var(--clr-primary-subtle);
+  color: #7a5800;
+  background-color: #fef3c0;
   padding: 0.2em 0.75em;
   border-radius: var(--radius-full);
-  border: 1px solid var(--clr-border-strong);
+  border: 1px solid #f5c040;
+}
+
+html[data-theme="dark"] .post-item time {
+  color: #f5c040;
+  background-color: #2a2000;
+  border-color: #7a5800;
 }
 
 .post-item-description {
@@ -479,11 +488,17 @@ th {
   font-size: var(--text-xs, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--clr-primary);
-  background-color: var(--clr-primary-subtle);
+  color: #7a5800;
+  background-color: #fef3c0;
   padding: 0.2em 0.75em;
   border-radius: var(--radius-full);
-  border: 1px solid var(--clr-border-strong);
+  border: 1px solid #f5c040;
+}
+
+html[data-theme="dark"] .post-header time {
+  color: #f5c040;
+  background-color: #2a2000;
+  border-color: #7a5800;
 }
 
 .post-description {
@@ -502,4 +517,30 @@ th {
 .post-content h3,
 .post-content h4 {
   margin-top: var(--sp-10);
+}
+
+/* =============================================
+   Theme toggle button
+   ============================================= */
+.theme-toggle {
+  font-family: var(--font-body);
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+  background: var(--clr-bg-surface);
+  border: 1px solid var(--clr-border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.3em 0.9em;
+  cursor: pointer;
+  transition: color var(--ease-fast), background-color var(--ease-fast),
+    border-color var(--ease-fast);
+  line-height: 1.6;
+}
+
+.theme-toggle:hover {
+  color: var(--clr-primary);
+  background-color: var(--clr-primary-subtle);
+  border-color: var(--clr-primary-light);
 }
