@@ -12,4 +12,8 @@ export default defineConfig({
       theme: 'dracula',
     },
   },
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "hover"
+  }
 });

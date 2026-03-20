@@ -309,7 +309,6 @@ pre {
   border-radius: var(--radius-lg);
   overflow-x: auto;
   margin-bottom: var(--sp-6);
-  box-shadow: var(--shadow-md);
   border: 1px solid var(--clr-border);
 }
 
