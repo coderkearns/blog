@@ -68,11 +68,11 @@ html[data-theme="dark"] {
   --clr-bg: #282a36;
   --clr-bg-surface: #44475a;
   --clr-bg-surface-hover: #4f5269;
-  --clr-bg-code: #1e1f29;
+  --clr-bg-code: #13141e;
 
   --clr-text: #f8f8f2;
   --clr-text-body: #f8f8f2;
-  --clr-text-muted: #6272a4;
+  --clr-text-muted: #9fa7c7;
   --clr-text-code: #f8f8f2;
 
   --clr-primary: #bd93f9;
@@ -83,9 +83,12 @@ html[data-theme="dark"] {
   --clr-border: #44475a;
   --clr-border-strong: #6272a4;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(189, 147, 249, 0.08);
+  --shadow-md: 0 4px 18px rgba(0, 0, 0, 0.65),
+    0 0 24px rgba(189, 147, 249, 0.12);
+  --shadow-lg: 0 10px 36px rgba(0, 0, 0, 0.75),
+    0 0 48px rgba(189, 147, 249, 0.14);
 }
 
 /* =============================================
@@ -402,7 +405,7 @@ th {
   display: block;
   text-decoration: none;
   padding: var(--sp-5) var(--sp-6);
-  background-color: var(--clr-bg-surface);
+  background-color: transparent;
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   transition: background-color var(--ease-fast), box-shadow var(--ease-fast),
