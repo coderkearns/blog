@@ -1,0 +1,361 @@
+---
+// Conway's Game of Life — one-time interactive component for the kitchen sink
+---
+
+<div class="gol-wrapper">
+  <div class="gol-toolbar">
+    <button id="gol-play" class="gol-btn gol-btn--primary" aria-label="Play">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+        <polygon points="2,1 13,7 2,13"/>
+      </svg>
+      Play
+    </button>
+    <button id="gol-pause" class="gol-btn" aria-label="Pause" hidden>
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+        <rect x="2" y="1" width="4" height="12" rx="1"/>
+        <rect x="8" y="1" width="4" height="12" rx="1"/>
+      </svg>
+      Pause
+    </button>
+    <button id="gol-step" class="gol-btn" aria-label="Step">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+        <polygon points="1,1 10,7 1,13"/>
+        <rect x="11" y="1" width="2" height="12" rx="1"/>
+      </svg>
+      Step
+    </button>
+    <button id="gol-clear" class="gol-btn" aria-label="Clear">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+        <path d="M2 3h10M5 3V2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1M3 3l.7 8.1A1 1 0 0 0 4.7 12h4.6a1 1 0 0 0 1-.9L11 3" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      Clear
+    </button>
+    <button id="gol-random" class="gol-btn" aria-label="Randomise">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+        <path d="M1 4h3l1.5 2L4 8H1M9 4h1.5l2.5 3-2.5 3H9M6 4l1 1.5M6 10l1-1.5" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Random
+    </button>
+    <span class="gol-stat">
+      Gen <strong id="gol-gen">0</strong>
+      &nbsp;·&nbsp;
+      Alive <strong id="gol-alive">0</strong>
+    </span>
+  </div>
+
+  <div class="gol-canvas-wrap">
+    <canvas id="gol-canvas" role="img" aria-label="Conway's Game of Life grid — click or drag to draw cells"></canvas>
+  </div>
+
+  <p class="gol-hint">Click or drag on the grid to draw cells, then press <strong>Play</strong>.</p>
+</div>
+
+<style>
+  .gol-wrapper {
+    margin: var(--sp-6) 0;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--clr-bg-surface);
+  }
+
+  .gol-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--clr-border);
+    background-color: var(--clr-bg-surface);
+  }
+
+  .gol-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.35em 0.85em;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--clr-border-strong);
+    background-color: var(--clr-bg);
+    color: var(--clr-text-body);
+    cursor: pointer;
+    transition: background-color var(--ease-fast), border-color var(--ease-fast), color var(--ease-fast);
+    line-height: 1.4;
+  }
+
+  .gol-btn:hover {
+    background-color: var(--clr-bg-surface-hover);
+    border-color: var(--clr-primary-light);
+    color: var(--clr-primary);
+  }
+
+  .gol-btn--primary {
+    background-color: var(--clr-primary);
+    border-color: var(--clr-primary);
+    color: #fff;
+  }
+
+  .gol-btn--primary:hover {
+    background-color: var(--clr-primary-hover);
+    border-color: var(--clr-primary-hover);
+    color: #fff;
+  }
+
+  .gol-stat {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+    color: var(--clr-text-muted);
+    white-space: nowrap;
+  }
+
+  .gol-stat strong {
+    color: var(--clr-primary);
+  }
+
+  .gol-canvas-wrap {
+    line-height: 0;
+    cursor: crosshair;
+  }
+
+  #gol-canvas {
+    display: block;
+    width: 100%;
+    touch-action: none;
+  }
+
+  .gol-hint {
+    padding: var(--sp-2) var(--sp-4);
+    font-size: 0.775rem;
+    color: var(--clr-text-muted);
+    border-top: 1px solid var(--clr-border);
+    margin: 0;
+  }
+</style>
+
+<script>
+  (() => {
+    const CELL = 14;           // px per cell
+    const FPS  = 12;           // simulation speed
+    const DENSITY = 0.28;      // random fill density
+
+    const canvas   = document.getElementById("gol-canvas") as HTMLCanvasElement;
+    const ctx      = canvas.getContext("2d")!;
+    const btnPlay  = document.getElementById("gol-play")   as HTMLButtonElement;
+    const btnPause = document.getElementById("gol-pause")  as HTMLButtonElement;
+    const btnStep  = document.getElementById("gol-step")   as HTMLButtonElement;
+    const btnClear = document.getElementById("gol-clear")  as HTMLButtonElement;
+    const btnRnd   = document.getElementById("gol-random") as HTMLButtonElement;
+    const elGen    = document.getElementById("gol-gen")!;
+    const elAlive  = document.getElementById("gol-alive")!;
+
+    // ── Size grid to canvas ────────────────────────────────────────────────
+    let COLS: number, ROWS: number;
+    let grid: Uint8Array, next: Uint8Array;
+    let generation = 0;
+    let running = false;
+    let rafId = 0;
+    let lastTick = 0;
+
+    function resize() {
+      const W = canvas.parentElement!.clientWidth;
+      const H = Math.round(W * 0.46);
+      canvas.width  = W;
+      canvas.height = H;
+      COLS = Math.floor(W / CELL);
+      ROWS = Math.floor(H / CELL);
+      grid = new Uint8Array(COLS * ROWS);
+      next = new Uint8Array(COLS * ROWS);
+      generation = 0;
+      updateStats();
+      draw();
+    }
+
+    const idx = (c: number, r: number) => r * COLS + c;
+
+    // ── Game logic ─────────────────────────────────────────────────────────
+    function tick() {
+      next.fill(0);
+      let alive = 0;
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          let n = 0;
+          for (let dr = -1; dr <= 1; dr++) {
+            for (let dc = -1; dc <= 1; dc++) {
+              if (dr === 0 && dc === 0) continue;
+              const nr = (r + dr + ROWS) % ROWS;
+              const nc = (c + dc + COLS) % COLS;
+              n += grid[idx(nc, nr)];
+            }
+          }
+          const cell = grid[idx(c, r)];
+          const live = cell ? (n === 2 || n === 3) : n === 3;
+          next[idx(c, r)] = live ? 1 : 0;
+          if (live) alive++;
+        }
+      }
+      [grid, next] = [next, grid];
+      generation++;
+      updateStats(alive);
+    }
+
+    // ── Rendering ──────────────────────────────────────────────────────────
+    // Read CSS vars for colours so we honour dark mode.
+    function cssVar(name: string) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function draw() {
+      const W = canvas.width;
+      const H = canvas.height;
+      const bg   = cssVar("--clr-bg-surface") || "#f0ebff";
+      const live = cssVar("--clr-primary")    || "#7c3aed";
+      const gridC = cssVar("--clr-border")    || "#e0d7ff";
+
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid lines
+      ctx.strokeStyle = gridC;
+      ctx.lineWidth = 0.5;
+      ctx.globalAlpha = 0.6;
+      for (let c = 0; c <= COLS; c++) {
+        ctx.beginPath(); ctx.moveTo(c * CELL, 0); ctx.lineTo(c * CELL, H); ctx.stroke();
+      }
+      for (let r = 0; r <= ROWS; r++) {
+        ctx.beginPath(); ctx.moveTo(0, r * CELL); ctx.lineTo(W, r * CELL); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+
+      // Cells
+      ctx.fillStyle = live;
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          if (grid[idx(c, r)]) {
+            ctx.fillRect(c * CELL + 1, r * CELL + 1, CELL - 2, CELL - 2);
+          }
+        }
+      }
+    }
+
+    function updateStats(alive?: number) {
+      elGen.textContent = String(generation);
+      if (alive === undefined) {
+        let a = 0;
+        for (let i = 0; i < grid.length; i++) a += grid[i];
+        alive = a;
+      }
+      elAlive.textContent = String(alive);
+    }
+
+    // ── Animation loop ─────────────────────────────────────────────────────
+    function loop(ts: number) {
+      if (!running) return;
+      if (ts - lastTick >= 1000 / FPS) {
+        tick();
+        draw();
+        lastTick = ts;
+      }
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function play() {
+      if (running) return;
+      running = true;
+      btnPlay.hidden  = true;
+      btnPause.hidden = false;
+      lastTick = performance.now();
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function pause() {
+      running = false;
+      cancelAnimationFrame(rafId);
+      btnPlay.hidden  = false;
+      btnPause.hidden = true;
+    }
+
+    // ── Drawing interaction ────────────────────────────────────────────────
+    let painting = false;
+    let paintValue = 1;
+
+    function cellAt(e: PointerEvent): [number, number] {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width  / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const c = Math.floor((e.clientX - rect.left) * scaleX / CELL);
+      const r = Math.floor((e.clientY - rect.top)  * scaleY / CELL);
+      return [c, r];
+    }
+
+    function paint(e: PointerEvent) {
+      const [c, r] = cellAt(e);
+      if (c < 0 || c >= COLS || r < 0 || r >= ROWS) return;
+      grid[idx(c, r)] = paintValue;
+      updateStats();
+      draw();
+    }
+
+    canvas.addEventListener("pointerdown", (e) => {
+      painting = true;
+      canvas.setPointerCapture(e.pointerId);
+      const [c, r] = cellAt(e);
+      if (c >= 0 && c < COLS && r >= 0 && r < ROWS) {
+        paintValue = grid[idx(c, r)] ? 0 : 1;
+      }
+      paint(e);
+    });
+    canvas.addEventListener("pointermove", (e) => { if (painting) paint(e); });
+    canvas.addEventListener("pointerup",   () => { painting = false; });
+    canvas.addEventListener("pointercancel", () => { painting = false; });
+
+    // ── Controls ───────────────────────────────────────────────────────────
+    btnPlay.addEventListener("click",  play);
+    btnPause.addEventListener("click", pause);
+    btnStep.addEventListener("click",  () => { pause(); tick(); draw(); });
+    btnClear.addEventListener("click", () => {
+      pause();
+      grid.fill(0);
+      generation = 0;
+      updateStats();
+      draw();
+    });
+    btnRnd.addEventListener("click", () => {
+      pause();
+      for (let i = 0; i < grid.length; i++) {
+        grid[i] = Math.random() < DENSITY ? 1 : 0;
+      }
+      generation = 0;
+      updateStats();
+      draw();
+    });
+
+    // ── Bootstrap ──────────────────────────────────────────────────────────
+    window.addEventListener("resize", () => {
+      const wasRunning = running;
+      pause();
+      resize();
+      if (wasRunning) play();
+    });
+
+    resize();
+
+    // Seed with a fun default pattern (Gosper glider gun)
+    const gun: [number, number][] = [
+      [1,5],[1,6],[2,5],[2,6],
+      [11,5],[11,6],[11,7],[12,4],[12,8],[13,3],[13,9],[14,3],[14,9],
+      [15,6],[16,4],[16,8],[17,5],[17,6],[17,7],[18,6],
+      [21,3],[21,4],[21,5],[22,3],[22,4],[22,5],[23,2],[23,6],
+      [25,1],[25,2],[25,6],[25,7],
+      [35,3],[35,4],[36,3],[36,4],
+    ];
+    for (const [c, r] of gun) {
+      if (c < COLS && r < ROWS) grid[idx(c, r)] = 1;
+    }
+    updateStats();
+    draw();
+  })();
+</script>
