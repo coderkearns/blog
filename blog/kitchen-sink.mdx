@@ -1,0 +1,267 @@
+---
+title: "Kitchen Sink: Testing All the Features"
+date: 2026-03-20
+description: "A comprehensive test post covering all Markdown features, code blocks, and custom components."
+---
+
+import Callout from "../src/components/Callout.astro";
+import Badge from "../src/components/Badge.astro";
+
+This post exists to stress-test the blog's rendering pipeline. It touches every Markdown element, dives deep into code blocks, and exercises both custom Astro components.
+
+---
+
+## Typography & Inline Formatting
+
+Here is a paragraph with **bold text**, _italic text_, ~~strikethrough~~, and `inline code`. You can also combine them: **_bold italic_** and **`bold code`**.
+
+Here is a [link to Astro's docs](https://docs.astro.build) and an [external link](https://github.com) that opens in context.
+
+Superscript and subscript aren't native Markdown, but everything else is covered below.
+
+---
+
+## Headings
+
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
+
+---
+
+## Lists
+
+### Unordered
+
+- Item one
+- Item two
+  - Nested item A
+  - Nested item B
+    - Doubly nested
+- Item three
+
+### Ordered
+
+1. First step
+2. Second step
+   1. Sub-step 2a
+   2. Sub-step 2b
+3. Third step
+
+### Task List
+
+- [x] Set up the blog
+- [x] Write the first post
+- [ ] Add dark mode toggle
+- [ ] Ship to production
+
+---
+
+## Blockquotes
+
+> "Programs must be written for people to read, and only incidentally for machines to execute."
+>
+> — Harold Abelson, *SICP*
+
+Nested blockquote:
+
+> Outer quote.
+>
+> > Inner quote, going deeper.
+
+---
+
+## Tables
+
+| Feature         | Supported | Notes                        |
+| --------------- | :-------: | ---------------------------- |
+| Bold / Italic   |     ✓     | Standard CommonMark          |
+| Tables          |     ✓     | GFM extension                |
+| Code blocks     |     ✓     | Shiki syntax highlighting    |
+| Custom components |   ✓     | MDX power feature            |
+| Task lists      |     ✓     | GFM extension                |
+
+---
+
+## Horizontal Rule
+
+Three ways to write it, same result:
+
+---
+
+---
+
+---
+
+## Images
+
+![A purple placeholder](https://placehold.co/800x400/7c3aed/faf8ff?text=Kitchen+Sink)
+
+---
+
+## Code Blocks
+
+### Inline code
+
+Use `const x = 42;` for a quick reference without a full block.
+
+### JavaScript
+
+```js
+// Arrow function with default parameter
+const greet = (name = "world") => `Hello, ${name}!`;
+
+console.log(greet());          // Hello, world!
+console.log(greet("Astro"));   // Hello, Astro!
+```
+
+### TypeScript
+
+```ts
+interface Post {
+  title: string;
+  date: Date;
+  description?: string;
+  tags: string[];
+}
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const post: Post = {
+  title: "Kitchen Sink",
+  date: new Date("2026-03-20"),
+  tags: ["meta", "test"],
+};
+
+console.log(formatDate(post.date)); // March 20, 2026
+```
+
+### Python
+
+```python
+from dataclasses import dataclass, field
+from datetime import date
+
+
+@dataclass
+class Post:
+    title: str
+    published: date
+    tags: list[str] = field(default_factory=list)
+
+    def summary(self) -> str:
+        tag_str = ", ".join(self.tags) if self.tags else "none"
+        return f"{self.title} ({self.published}) — tags: {tag_str}"
+
+
+post = Post("Kitchen Sink", date(2026, 3, 20), ["meta", "test"])
+print(post.summary())
+# Kitchen Sink (2026-03-20) — tags: meta, test
+```
+
+### Shell / Bash
+
+```bash
+# Install dependencies and start dev server
+pnpm install
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Deploy to GitHub Pages
+pnpm deploy
+```
+
+### CSS
+
+```css
+.site-header {
+  padding: var(--sp-5) 0;
+  border-bottom: 2px solid transparent;
+  background-image: var(--gradient-accent);
+  background-size: 100% 2px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+```
+
+### JSON
+
+```json
+{
+  "name": "blog",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "deploy": "astro build && gh-pages -d dist"
+  }
+}
+```
+
+### Astro / JSX-like template
+
+```astro
+---
+const { title, date } = Astro.props;
+const formatted = date.toLocaleDateString("en-US", { dateStyle: "long" });
+---
+
+<article>
+  <h1>{title}</h1>
+  <time datetime={date.toISOString()}>{formatted}</time>
+  <slot />
+</article>
+```
+
+---
+
+## Custom Component — Callout
+
+The `Callout` component accepts a `type` prop (`note`, `tip`, `warning`, `danger`) and an optional `title` override.
+
+<Callout type="note">
+  This is a **note** callout. Use it for general information the reader should keep in mind.
+</Callout>
+
+<Callout type="tip" title="Pro Tip">
+  You can nest _Markdown_ inside a callout body. Bold, italic, `inline code`, and even [links](https://astro.build) all work.
+</Callout>
+
+<Callout type="warning">
+  Watch out! This is a **warning** callout. It uses amber tones to signal caution.
+</Callout>
+
+<Callout type="danger" title="Do Not Do This">
+  This is a **danger** callout. Reserve it for actions that could cause data loss or security issues.
+</Callout>
+
+---
+
+## Custom Component with Custom CSS — Badge
+
+`Badge` is a pure CSS component with scoped styles baked in. It renders a small pill label inline.
+
+Statuses: <Badge label="stable" variant="success" /> <Badge label="beta" variant="warning" /> <Badge label="deprecated" variant="danger" /> <Badge label="new" variant="info" /> <Badge label="default" />
+
+You can drop badges into prose too. The API surface is <Badge label="v1.0" variant="info" /> and the current build is <Badge label="passing" variant="success" />.
+
+---
+
+## Putting It All Together
+
+<Callout type="tip" title="Summary">
+  Every element above — headings, lists, tables, blockquotes, code blocks, images, inline formatting, task lists, and both custom components — renders without any global CSS changes. The `Callout` component uses design tokens from `global.css`, while `Badge` ships its own fully scoped styles.
+</Callout>
+
+That's the kitchen sink. If something looks broken, this is the place to debug it.

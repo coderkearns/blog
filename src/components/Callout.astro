@@ -1,0 +1,125 @@
+---
+interface Props {
+  type?: "note" | "tip" | "warning" | "danger";
+  title?: string;
+}
+
+const { type = "note", title } = Astro.props;
+
+const icons = {
+  note: "ℹ",
+  tip: "💡",
+  warning: "⚠",
+  danger: "🚨",
+};
+
+const labels = {
+  note: "Note",
+  tip: "Tip",
+  warning: "Warning",
+  danger: "Danger",
+};
+---
+
+<aside class={`callout callout--${type}`}>
+  <p class="callout__label">
+    <span aria-hidden="true">{icons[type]}</span>
+    {title ?? labels[type]}
+  </p>
+  <div class="callout__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    border-radius: var(--radius-md);
+    padding: var(--sp-4) var(--sp-5);
+    margin: var(--sp-6) 0;
+    border-left: 4px solid;
+  }
+
+  .callout__label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sp-2);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .callout__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* note */
+  .callout--note {
+    background-color: var(--clr-primary-subtle);
+    border-color: var(--clr-primary-light);
+    color: var(--clr-text);
+  }
+  .callout--note .callout__label {
+    color: var(--clr-primary);
+  }
+
+  /* tip */
+  .callout--tip {
+    background-color: #ecfdf5;
+    border-color: #34d399;
+    color: #064e3b;
+  }
+  .callout--tip .callout__label {
+    color: #059669;
+  }
+
+  /* warning */
+  .callout--warning {
+    background-color: #fffbeb;
+    border-color: #fbbf24;
+    color: #78350f;
+  }
+  .callout--warning .callout__label {
+    color: #d97706;
+  }
+
+  /* danger */
+  .callout--danger {
+    background-color: #fef2f2;
+    border-color: #f87171;
+    color: #7f1d1d;
+  }
+  .callout--danger .callout__label {
+    color: #dc2626;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .callout--tip {
+      background-color: #022c22;
+      border-color: #059669;
+      color: #a7f3d0;
+    }
+    .callout--tip .callout__label {
+      color: #34d399;
+    }
+
+    .callout--warning {
+      background-color: #1c1300;
+      border-color: #d97706;
+      color: #fde68a;
+    }
+    .callout--warning .callout__label {
+      color: #fbbf24;
+    }
+
+    .callout--danger {
+      background-color: #1f0707;
+      border-color: #dc2626;
+      color: #fecaca;
+    }
+    .callout--danger .callout__label {
+      color: #f87171;
+    }
+  }
+</style>
