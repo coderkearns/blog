@@ -2,31 +2,31 @@
    Design Tokens — modify these to retheme!
    ============================================= */
 :root {
-  /* --- Color palette (purple / lavender vibes) --- */
-  --clr-bg: #faf8ff;
-  --clr-bg-surface: #f0ebff;
-  --clr-bg-surface-hover: #e6deff;
-  --clr-bg-code: #180d2e;
+  /* --- Color palette (soft lavender / dusty violet) --- */
+  --clr-bg: #faf7ff;
+  --clr-bg-surface: #f2eaff;
+  --clr-bg-surface-hover: #e8deff;
+  --clr-bg-code: #160f22;
 
-  --clr-text: #1e0a3c;
-  --clr-text-body: #3b2166;
-  --clr-text-muted: #8b7aaa;
-  --clr-text-code: #e8d9ff;
+  --clr-text: #2a1a3e;
+  --clr-text-body: #4a3268;
+  --clr-text-muted: #9e8ab8;
+  --clr-text-code: #ecdeff;
 
-  --clr-primary: #7c3aed;
-  --clr-primary-hover: #5b21b6;
-  --clr-primary-light: #a78bfa;
-  --clr-primary-subtle: #ede9fe;
+  --clr-primary: #9b72c0;
+  --clr-primary-hover: #7a52a0;
+  --clr-primary-light: #c4a8e0;
+  --clr-primary-subtle: #f0eaff;
 
-  --clr-border: #e0d7ff;
-  --clr-border-strong: #c4b5fd;
+  --clr-border: #e0d4f5;
+  --clr-border-strong: #c8b4e8;
 
   /* Gradient used for decorative accents */
-  --gradient-accent: linear-gradient(90deg, #7c3aed 0%, #c084fc 60%, #f472b6 100%);
+  --gradient-accent: linear-gradient(90deg, #9b72c0 0%, #c084e8 55%, #e891a0 100%);
 
   /* --- Typography --- */
-  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Nunito", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
 
   /* --- Spacing scale --- */
@@ -48,12 +48,12 @@
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* --- Shadows (tinted purple) --- */
-  --shadow-sm: 0 1px 3px rgba(109, 40, 217, 0.08),
-    0 1px 2px rgba(109, 40, 217, 0.05);
-  --shadow-md: 0 4px 14px rgba(109, 40, 217, 0.12),
-    0 2px 6px rgba(109, 40, 217, 0.07);
-  --shadow-lg: 0 10px 30px rgba(109, 40, 217, 0.16);
+  /* --- Shadows (tinted violet) --- */
+  --shadow-sm: 0 1px 3px rgba(120, 70, 180, 0.08),
+    0 1px 2px rgba(120, 70, 180, 0.05);
+  --shadow-md: 0 4px 14px rgba(120, 70, 180, 0.12),
+    0 2px 6px rgba(120, 70, 180, 0.07);
+  --shadow-lg: 0 10px 30px rgba(120, 70, 180, 0.16);
 
   /* --- Transitions --- */
   --ease-fast: 150ms ease;
@@ -63,31 +63,29 @@
   --content-width: 48rem;
 }
 
-/* Dark mode — deeper purple palette */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --clr-bg: #100820;
-    --clr-bg-surface: #1a0f30;
-    --clr-bg-surface-hover: #241540;
-    --clr-bg-code: #0c0618;
+/* Dark mode — soft plum night palette */
+html[data-theme="dark"] {
+  --clr-bg: #160f22;
+  --clr-bg-surface: #201530;
+  --clr-bg-surface-hover: #2c1c40;
+  --clr-bg-code: #0e0918;
 
-    --clr-text: #f0e8ff;
-    --clr-text-body: #d4c4f0;
-    --clr-text-muted: #9b8cc0;
-    --clr-text-code: #e8d9ff;
+  --clr-text: #ecdeff;
+  --clr-text-body: #d4c4f0;
+  --clr-text-muted: #9e8ab8;
+  --clr-text-code: #ecdeff;
 
-    --clr-primary: #a78bfa;
-    --clr-primary-hover: #c4b5fd;
-    --clr-primary-light: #7c3aed;
-    --clr-primary-subtle: #2e1b55;
+  --clr-primary: #c4a8e0;
+  --clr-primary-hover: #dbc8f5;
+  --clr-primary-light: #9b72c0;
+  --clr-primary-subtle: #2e1b50;
 
-    --clr-border: #2e1b55;
-    --clr-border-strong: #4a2e82;
+  --clr-border: #2e1b50;
+  --clr-border-strong: #4a2e78;
 
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
-  }
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* =============================================
@@ -502,4 +500,30 @@ th {
 .post-content h3,
 .post-content h4 {
   margin-top: var(--sp-10);
+}
+
+/* =============================================
+   Theme toggle button
+   ============================================= */
+.theme-toggle {
+  font-family: var(--font-body);
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted);
+  background: var(--clr-bg-surface);
+  border: 1px solid var(--clr-border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.3em 0.9em;
+  cursor: pointer;
+  transition: color var(--ease-fast), background-color var(--ease-fast),
+    border-color var(--ease-fast);
+  line-height: 1.6;
+}
+
+.theme-toggle:hover {
+  color: var(--clr-primary);
+  background-color: var(--clr-primary-subtle);
+  border-color: var(--clr-primary-light);
 }
