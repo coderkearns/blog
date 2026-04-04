@@ -7,6 +7,7 @@ description: "A comprehensive test post covering all Markdown features, code blo
 import Callout from "../src/components/Callout.astro";
 import Badge from "../src/components/Badge.astro";
 import GameOfLife from "../src/components/GameOfLife.astro";
+import LiveDemo from "../src/components/LiveDemo.astro"
 
 This post exists to stress-test the blog's rendering pipeline. It touches every Markdown element, dives deep into code blocks, and exercises both custom Astro components.
 
@@ -224,6 +225,38 @@ const formatted = date.toLocaleDateString("en-US", { dateStyle: "long" });
   <slot />
 </article>
 ```
+
+### Live Demo
+
+The code sample and live demo below should appear as one connected block with only a divider line between them.
+
+```tsx
+<LiveDemo
+  fn={(first, last) => `Hello, ${first} ${last}!`}
+  props={[
+    { name: "first", type: "text", value: "Ada" },
+    { name: "last", type: "text", value: "Lovelace" }
+  ]}
+/>
+```
+
+<LiveDemo
+  fn={(first, last) => `Hello, ${first} ${last}!`}
+  props={[
+    { name: "first", type: "text", value: "Ada" },
+    { name: "last", type: "text", value: "Lovelace" },
+  ]}
+/>
+
+### Live Demos Without Code
+
+<LiveDemo
+  fn={(first, last) => `Hello, ${first} ${last}!`}
+  props={[
+    { name: "first", type: "text", value: "Ada" },
+    { name: "last", type: "text", value: "Lovelace" },
+  ]}
+/>
 
 ---
 

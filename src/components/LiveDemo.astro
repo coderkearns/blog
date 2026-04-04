@@ -1,0 +1,233 @@
+---
+interface DemoProp {
+  name: string;
+  type?: string;
+  label?: string;
+  placeholder?: string;
+  value?: string;
+}
+
+interface Props {
+  fn: (...args: string[]) => string;
+  props: DemoProp[];
+  title?: string;
+  placeholder?: string;
+}
+
+const {
+  fn,
+  props: fields,
+  title = "Live demo",
+  placeholder = "",
+} = Astro.props;
+
+const demoId = `live-demo-${Math.random().toString(36).slice(2, 10)}`;
+const safeFn = typeof fn === "function" ? fn.toString() : "";
+const encodedFn = encodeURIComponent(safeFn);
+const encodedFields = encodeURIComponent(JSON.stringify(fields ?? []));
+---
+
+<section
+  class="live-demo"
+  data-live-demo={demoId}
+  data-live-demo-fn={encodedFn}
+  data-live-demo-fields={encodedFields}
+>
+  <p class="live-demo__title">{title}</p>
+
+  <form class="live-demo__form" autocomplete="off">
+    {
+      fields.map((field) => {
+        const inputId = `${demoId}-${field.name}`;
+        return (
+          <label class="live-demo__field" for={inputId}>
+            <span class="live-demo__label">{field.label ?? field.name}</span>
+            <input
+              id={inputId}
+              name={field.name}
+              type={field.type ?? "text"}
+              value={field.value ?? ""}
+              placeholder={field.placeholder ?? placeholder}
+              class="live-demo__input"
+            />
+          </label>
+        );
+      })
+    }
+  </form>
+
+  <p class="live-demo__output-label">Output</p>
+  <output class="live-demo__output" aria-live="polite"></output>
+</section>
+
+<script is:inline>
+  (() => {
+    const demos = document.querySelectorAll("[data-live-demo]");
+
+    for (const demo of demos) {
+      if (
+        !(demo instanceof HTMLElement) ||
+        demo.dataset.liveDemoReady === "true"
+      ) {
+        continue;
+      }
+
+      demo.dataset.liveDemoReady = "true";
+
+      const encodedFn = demo.dataset.liveDemoFn ?? "";
+      const encodedFields = demo.dataset.liveDemoFields ?? "";
+
+      let fnText = "";
+      let fields = [];
+
+      try {
+        fnText = decodeURIComponent(encodedFn);
+        fields = JSON.parse(decodeURIComponent(encodedFields));
+      } catch {
+        const outputEl = demo.querySelector(".live-demo__output");
+        if (outputEl instanceof HTMLOutputElement) {
+          outputEl.textContent = "Unable to initialize live demo.";
+          outputEl.classList.add("is-error");
+        }
+        continue;
+      }
+
+      let evaluator = null;
+      try {
+        evaluator = Function(`"use strict"; return (${fnText});`)();
+      } catch {
+        evaluator = null;
+      }
+
+      const outputEl = demo.querySelector(".live-demo__output");
+      if (!(outputEl instanceof HTMLOutputElement)) {
+        continue;
+      }
+
+      const run = () => {
+        if (typeof evaluator !== "function") {
+          outputEl.classList.add("is-error");
+          outputEl.textContent = "Invalid demo function.";
+          return;
+        }
+
+        const values = fields.map((field) => {
+          const input = demo.querySelector(`[name="${field.name}"]`);
+          return input instanceof HTMLInputElement ? input.value : "";
+        });
+
+        try {
+          const result = evaluator(...values);
+          outputEl.classList.remove("is-error");
+          outputEl.textContent = String(result ?? "");
+        } catch (error) {
+          outputEl.classList.add("is-error");
+          outputEl.textContent =
+            error instanceof Error ? error.message : "Demo execution failed.";
+        }
+      };
+
+      demo.addEventListener("input", run);
+      run();
+    }
+  })();
+</script>
+
+<style>
+  .live-demo {
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-4) var(--sp-5) var(--sp-5);
+    margin: var(--sp-6) 0;
+    background-color: var(--clr-bg-surface);
+  }
+
+  .live-demo__title {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--clr-text-muted);
+    margin-bottom: var(--sp-3);
+  }
+
+  .live-demo__form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+  }
+
+  .live-demo__field {
+    display: grid;
+    gap: var(--sp-1);
+  }
+
+  .live-demo__label {
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+    font-weight: 600;
+  }
+
+  .live-demo__input {
+    width: 100%;
+    border: 1px solid var(--clr-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    padding: 0.45rem 0.55rem;
+    font: inherit;
+  }
+
+  .live-demo__input:focus {
+    outline: 2px solid var(--clr-primary-light);
+    outline-offset: 1px;
+  }
+
+  .live-demo__output-label {
+    margin: 0 0 var(--sp-2);
+    font-size: 0.82rem;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--font-mono);
+  }
+
+  .live-demo__output {
+    display: block;
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-sm);
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    min-height: 2.5rem;
+    padding: var(--sp-2) var(--sp-3);
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .live-demo__output.is-error {
+    color: #dc2626;
+    border-color: #f87171;
+  }
+
+  :global(pre + .live-demo[data-live-demo]) {
+    margin-top: calc(var(--sp-6) * -1);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: 0;
+  }
+
+  :global(pre:has(+ .live-demo)) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @media (max-width: 40rem) {
+    .live-demo {
+      padding-left: var(--sp-4);
+      padding-right: var(--sp-4);
+    }
+  }
+</style>

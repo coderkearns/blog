@@ -1,0 +1,187 @@
+---
+title: "Understanding Python Type Hints"
+date: 2026-04-03
+description: "What are type hints? Should I use them?"
+---
+
+import LiveDemo from "../src/components/LiveDemo.astro"
+
+{/*
+PEP 484
+Python3.5
+Released September 13, 2015
+*/}
+
+{/* 
+Audience: they just want the info in their brain:
+
+""" - one comment
+Love the short, yet detailed blog post.
+
+Have to mention it: great layouting and the theme together with the live samples make reading the post a great experience. :)
+"""
+
+Use live samples somehow?
+
+Assume amateur python proficiency but no type hint knowledge
+Output blocks? Maybe but I'm not sure.
+Create a custom "live sample" component that takes a Javscript function and does work?
+
+Show over tell: use code blocks almost every other paragraph
+*/}
+
+{/*
+~1500 words
+*/}
+{/* 
+```python
+def add(a, b):
+    return a + b
+```
+
+<LiveDemo
+          fn={(a, b) => {
+            let aIsString = isNaN(a)
+            let bIsString = isNaN(b)
+              if (aIsString && bIsString) {
+                  return a + b
+              } else if (!aIsString && !bIsString) {
+                  return Number(a) + Number(b)
+              } else {
+                  throw new Error("TypeError: can only concatenate str (not \"int\") to str")
+              }
+  }}
+  props={[
+    { name: "a", type: "text", value: "1", placeholder: "0" },
+    { name: "b", type: "text", value: "2", placeholder: "0" },
+  ]}
+/> */}
+
+
+TODO Introduction
+
+{/* Summary of type hints
+More than a "how-to" article than a dairy entry
+"In this article, you will"
+Every sentence is fixated on descring how the arrow functions work.
+Written "tightly and directly", lots of active language.
+Very functional, straightforward, and consise. */}
+
+## What are Type Hints?
+
+Python is a dynamically typed language, meaning that you don't assign specific static types to variable as you code.
+While this creates an ease-of-use not found in other programming languages, it can lead to ambiguity in some situations.
+
+Consider the following Python function, meant to add two numbers together.
+
+```python
+def add(a, b):
+    return a + b
+
+add(2, 2) # 4
+add(3, 5) # 8
+add(4, -2) # 1
+```
+
+Pretty straightforward.
+
+However, because these variables can be any type, this can cause errors if we don't understand what the function is doing internally.
+
+```python
+def add(a, b):
+    return a + b
+
+add(2, 2) # 4
+add("Hello ", "World!") # "Hello World!"
+add("Hello", 2) # TypeError: can only concatenate str (not "int") to str
+```
+<LiveDemo
+          fn={(a, b) => {
+            let aIsString = isNaN(a)
+            let bIsString = isNaN(b)
+              if (aIsString && bIsString) {
+                  return a + b
+              } else if (!aIsString && !bIsString) {
+                  return Number(a) + Number(b)
+              } else {
+                  throw new Error("TypeError: can only concatenate str (not \"int\") to str")
+              }
+  }}
+  props={[
+    { name: "a", type: "text", value: "Hello ", placeholder: "0" },
+    { name: "b", type: "text", value: "World!", placeholder: "0" },
+  ]}
+/> 
+
+We don't want to require our users to understand how all our functions work internally.
+To solve this, Python 3.5 was released in September 2015 with [PEP 484: Type Hints](https://peps.python.org/pep-0484/).
+A type hint is a special [function annotation](https://peps.python.org/pep-3107/) that tells users what data type is required as an input or output:
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+<LiveDemo
+          fn={(a, b) => a + b}
+  props={[
+    { name: "a: integer", type: "number", value: "2", placeholder: "0" },
+    { name: "b: integer", type: "number", value: "2", placeholder: "0" },
+  ]}
+/> 
+
+You'll notice that this doesn't *require* users to obey the type hint, but it does communicate what the function author expects.
+This also will provide [Intellisense](https://code.visualstudio.com/docs/editing/intellisense) (autocomplete and hover-tooltips) in most code editors.
+
+A python type hint can be any valid data type, including compound types:
+
+```python
+class Grid:
+    def draw_point_at_coordinates(coords: tuple[int, int]):
+        x = coords[0]
+        y = coords[1]
+        ...
+
+my_grid = Grid()
+coords = (2, 3)
+my_grid.draw_point_at_coordinates(coords) # x = 2 and y = 3
+```
+
+Custom types and classes also work:
+
+```python
+def show_grid(grid: Grid):
+    for row in grid:
+        print(row)
+
+my_grid.draw_point_at_coordinates((1, 1))
+show_grid(my_grid)
+# @...
+# ..@.
+# ....
+```
+
+## TODO: The Academic Work
+
+TODO Introduction
+
+### Including examples from those repos
+
+{/* TODO Organize by questions:
+
+- Do they use them? Yes 91%
+- How much?
+- How? */}
+
+## TODO My Research
+
+TODO Synthesis
+
+TODO Why?
+
+## TODO Present an Opinion
+
+TODO Conclusion
+
+{/* Write in second person ("you ...", "finally, you explored...")
+but not super concerned with what you think or feel, just
+talking. Think like a mechanic "here's your problem". */}
