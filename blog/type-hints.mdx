@@ -96,6 +96,8 @@ add("Hello ", "World!") # "Hello World!"
 add("Hello", 2) # TypeError: can only concatenate str (not "int") to str
 ```
 <LiveDemo
+    title={null}
+
           fn={(a, b) => {
             let aIsString = isNaN(a)
             let bIsString = isNaN(b)
@@ -108,8 +110,8 @@ add("Hello", 2) # TypeError: can only concatenate str (not "int") to str
               }
   }}
   props={[
-    { name: "a", type: "text", value: "Hello ", placeholder: "0" },
-    { name: "b", type: "text", value: "World!", placeholder: "0" },
+    { name: "a: any", type: "text", value: "Hello ", placeholder: "0" },
+    { name: "b: any", type: "text", value: "World!", placeholder: "0" },
   ]}
 /> 
 
@@ -122,7 +124,18 @@ def add(a: int, b: int) -> int:
     return a + b
 ```
 <LiveDemo
-          fn={(a, b) => a + b}
+    title={null}
+          fn={(a, b) => {
+            let aIsString = isNaN(a)
+            let bIsString = isNaN(b)
+              if (aIsString && bIsString) {
+                  return a + b
+              } else if (!aIsString && !bIsString) {
+                  return Number(a) + Number(b)
+              } else {
+                  throw new Error("TypeError: can only concatenate str (not \"int\") to str")
+              }
+  }}
   props={[
     { name: "a: integer", type: "number", value: "2", placeholder: "0" },
     { name: "b: integer", type: "number", value: "2", placeholder: "0" },
@@ -130,7 +143,7 @@ def add(a: int, b: int) -> int:
 /> 
 
 You'll notice that this doesn't *require* users to obey the type hint, but it does communicate what the function author expects.
-This also will provide [Intellisense](https://code.visualstudio.com/docs/editing/intellisense) (autocomplete and hover-tooltips) in most code editors.
+This also will provide [Intellisense](https://code.visualstudio.com/docs/editing/intellisense) (autocomplete, hover-tooltips, and errors if the types are violated) in most code editors.
 
 A python type hint can be any valid data type, including compound types:
 
@@ -150,8 +163,7 @@ Custom types and classes also work:
 
 ```python
 def show_grid(grid: Grid):
-    for row in grid:
-        print(row)
+    ...
 
 my_grid.draw_point_at_coordinates((1, 1))
 show_grid(my_grid)
@@ -160,23 +172,96 @@ show_grid(my_grid)
 # ....
 ```
 
-## TODO: The Academic Work
+## How are They Used?
 
-TODO Introduction
+In [a recent study](https://www.researchgate.net/profile/Joao-Montandon/publication/400405267_Understanding_Type_Hints_in_Python_Libraries_and_Frameworks_Early_Insights/links/698276c45d60ab48356a9f61/Understanding-Type-Hints-in-Python-Libraries-and-Frameworks-Early-Insights.pdf),
+researchers looked at 152 of the top python repositories on [GitHub](https://github.com/search?q=language%3Apython+stars%3A%3E1000&type=Repositories&ref=advsearch&l=&l=&s=stars&o=desc) and looked at how they used type hints.
 
-### Including examples from those repos
+They found that 91% of these top repos used at least one type hint.
 
-{/* TODO Organize by questions:
+That doesn't mean they were all used the same way. None of the repos use type hints on *every single function*. Most repos only used type hints for 13% of their code. The [openai-python](https://github.com/openai/openai-python) library used them the most, and they only covered 61% of their code.
 
-- Do they use them? Yes 91%
-- How much?
-- How? */}
+The majority of these repos type hinted functions, but almost none type hinted variables:
 
-## TODO My Research
+```python
+# Common:
+def log_to_file(line: str) -> bool:
+    logged_successfully = log(line, "my_log.txt")
+    return logged_successfully
 
-TODO Synthesis
+# Uncommon:
+links: list[str] = ["https://google.com/"]
+```
 
-TODO Why?
+The types these repos hint also vary. Most type hints were builtins, less were local custom types, and almost none for external types.
+
+```python
+# Common: type hinting builtins
+def log(line: str, level: int):
+    ...
+
+
+# Less common: type hinting custom types
+class Logger:
+    ...
+
+class LoggerOptions:
+    ...
+
+def create_logger(name: str, options: LoggerOptions) -> Logger:
+    ...
+
+
+# Least common: type hinting external types
+from openai import OpenAI
+
+def create_ai_logger(name: str, ai_instance: OpenAI) -> Logger:
+    ...
+
+```
+
+## What's the Developer Experience With Them?
+
+While the study looked at where and how type hints were used, it doesn't include why a developer would use a type hint in one situation but not another.
+It also doesn't include what work goes into maintaining type hints, or any developer's opinions on working with type hints.
+
+I asked some friends of mine who've used python type hints in their libraries, and here's what they said:
+
+**Did you like them?**
+
+They loved them, and enjoyed the additional intellisense they provided.
+
+**What did you hint?**
+
+They all hinted every single method and function, but didn't hint variables.
+
+**Is hinting worth it?**
+
+They all agreed that it was and the amount of extra effort it takes is minimal.
+
+**Is it more work to maintain?**
+
+On the contrary, they each brought up that it made it easier to maintain. They cited that type hints require less documentation, and that they make it easier to work in groups.
+
+{/* ## Paul
+
+- Nice coming from typed languages and always uses it (~0:30ish)
+- Uses in classes, methods, and functions. Not variables or anything else. (~1:30)
+- Every argument or return value, void functions are the only exception (barely ever marks return None). (~1:50)
+- Is it worth it if you're also writing docs or an API reference? Even docstrings? He says yes, it takes 3 seconds. (~2:50)
+- Do you have to go back and change it often? No. Actually, it's nice because you have to plan the types when you're writing the stub and it helps you plan (~4:00)
+- There's no loss in putting them in, why not? Honestly then you don't need a doc string to include arguments. (5:20)
+
+## Daniel
+
+- Built project apollo for obsidian, used python as 3-file backend. (~0:40)
+- How did you decide whether to use type hints? ChatGPT put them in the code and he learned them. (~1:20)
+- Liked the intellisense. (~1:50)
+- Chat auto-hinted all the methods. (~2:00)
+- 60-70% hinted. (~2:30)
+- Is it worth the extra work? Yes its basically no work, like 4 words. (~2:45)
+- Especially useful for projects you're working with others on, or if its a library (~3:10)
+- How often did you need to go back and change a type hint? Never so far. (~4:00) */}
 
 ## TODO Present an Opinion
 

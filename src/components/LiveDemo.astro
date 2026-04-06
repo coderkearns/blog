@@ -33,7 +33,7 @@ const encodedFields = encodeURIComponent(JSON.stringify(fields ?? []));
   data-live-demo-fn={encodedFn}
   data-live-demo-fields={encodedFields}
 >
-  <p class="live-demo__title">{title}</p>
+  {title && <p class="live-demo__title">{title}</p>}
 
   <form class="live-demo__form" autocomplete="off">
     {
