@@ -6,71 +6,68 @@ description: "What are type hints? Should I use them?"
 
 import LiveDemo from "../src/components/LiveDemo.astro"
 
-{/*
-PEP 484
-Python3.5
-Released September 13, 2015
-*/}
+Python has a type system, but variables and functions aren’t statically typed. Taking any data type can be a huge plus, especially for those learning to code. However, it can introduce unexpected bugs and take some getting used to if you’re coming from another programming language.
 
-{/* 
-Audience: they just want the info in their brain:
+[PEP 484 - Type Hints](https://peps.python.org/pep-0484/) comes to the rescue! In this article, you'll learn what type hints are, why they're useful, and how they can help you with your code:
 
-""" - one comment
-Love the short, yet detailed blog post.
 
-Have to mention it: great layouting and the theme together with the live samples make reading the post a great experience. :)
-"""
-
-Use live samples somehow?
-
-Assume amateur python proficiency but no type hint knowledge
-Output blocks? Maybe but I'm not sure.
-Create a custom "live sample" component that takes a Javscript function and does work?
-
-Show over tell: use code blocks almost every other paragraph
-*/}
-
-{/*
-~1500 words
-*/}
-{/* 
 ```python
-def add(a, b):
-    return a + b
+def move_up(x: int, y: int) -> tuple[int, int]:
+    return (x, y + 1)
+
+new_x, new_y = move_up(2, 3)
 ```
 
-<LiveDemo
-          fn={(a, b) => {
-            let aIsString = isNaN(a)
-            let bIsString = isNaN(b)
-              if (aIsString && bIsString) {
-                  return a + b
-              } else if (!aIsString && !bIsString) {
-                  return Number(a) + Number(b)
-              } else {
-                  throw new Error("TypeError: can only concatenate str (not \"int\") to str")
-              }
-  }}
-  props={[
-    { name: "a", type: "text", value: "1", placeholder: "0" },
-    { name: "b", type: "text", value: "2", placeholder: "0" },
-  ]}
-/> */}
+## What Are Type Hints?
 
+A type hint is a special [function annotation](https://peps.python.org/pep-3107/) that serves as a note to users, indicating the expected data type of a variable. These can be used on function parameters, return values, or on normal variables directly:
 
-TODO Introduction
+```python
+# Parameters get a type hint with the `: <type>` syntax
+def hello(name: str):
+    print("Hello, " + name)
 
-{/* Summary of type hints
-More than a "how-to" article than a dairy entry
-"In this article, you will"
-Every sentence is fixated on descring how the arrow functions work.
-Written "tightly and directly", lots of active language.
-Very functional, straightforward, and consise. */}
+# Return values get a type hint with a hyphen and and arrow, `-> <type>`
+def get_length(thing) -> int:
+    return len(thing)
 
-## What are Type Hints?
+# Variables, like parameters, use the `: <type>` syntax
+subscribers: list[str | int] = ["john.doe@email.com", 1234567890]
+```
 
-Python is a dynamically typed language, meaning that you don't assign specific static types to variable as you code.
-While this creates an ease-of-use not found in other programming languages, it can lead to ambiguity in some situations.
+A Python type hint can be any valid data type, including compound types:
+
+```python
+class Grid:
+    # A coordinate here is a tuple of exactly two ints, like (2, 5)
+    def draw_point_at_coordinates(coords: tuple[int, int]):
+        x = coords[0]
+        y = coords[1]
+        ...
+
+my_grid = Grid()
+coords = (2, 3)
+my_grid.draw_point_at_coordinates(coords) # x = 2 and y = 3
+```
+
+Custom types and classes also work:
+
+```python
+# This function accepts a Grid object
+# To use this type hint, Grid must be defined in this file somewhere
+def show_grid(grid: Grid):
+    ...
+
+my_grid.draw_point_at_coordinates((1, 1))
+show_grid(my_grid)
+# @...
+# ..@.
+# ....
+```
+
+## Why Use Type Hints?
+
+Python is a dynamically typed language, meaning that you don't assign specific static types to variables as you code, and a variable can change the type it's holding. While this creates an ease of use not found in other programming languages, it can lead to ambiguity in some situations.
 
 Consider the following Python function, meant to add two numbers together.
 
@@ -85,7 +82,7 @@ add(4, -2) # 1
 
 Pretty straightforward.
 
-However, because these variables can be any type, this can cause errors if we don't understand what the function is doing internally.
+However, because these variables can be of any type, this can cause errors if a user doesn't understand how the function works internally. Try out each of the following examples:
 
 ```python
 def add(a, b):
@@ -96,8 +93,6 @@ add("Hello ", "World!") # "Hello World!"
 add("Hello", 2) # TypeError: can only concatenate str (not "int") to str
 ```
 <LiveDemo
-    title={null}
-
           fn={(a, b) => {
             let aIsString = isNaN(a)
             let bIsString = isNaN(b)
@@ -115,16 +110,15 @@ add("Hello", 2) # TypeError: can only concatenate str (not "int") to str
   ]}
 /> 
 
-We don't want to require our users to understand how all our functions work internally.
-To solve this, Python 3.5 was released in September 2015 with [PEP 484: Type Hints](https://peps.python.org/pep-0484/).
-A type hint is a special [function annotation](https://peps.python.org/pep-3107/) that tells users what data type is required as an input or output:
+This function can add strings to strings, or integers to integers, but that isn't clear on the surface.
+
+You don’t want to require your users to understand how all your functions work internally. To solve this, Python 3.5 was released in September 2015 with [PEP 484: Type Hints](https://peps.python.org/pep-0484/). In this example, users know this function is designed to expect only 2 integers and will return an integer.
 
 ```python
 def add(a: int, b: int) -> int:
     return a + b
 ```
 <LiveDemo
-    title={null}
           fn={(a, b) => {
             let aIsString = isNaN(a)
             let bIsString = isNaN(b)
@@ -142,106 +136,67 @@ def add(a: int, b: int) -> int:
   ]}
 /> 
 
-You'll notice that this doesn't *require* users to obey the type hint, but it does communicate what the function author expects.
-This also will provide [Intellisense](https://code.visualstudio.com/docs/editing/intellisense) (autocomplete, hover-tooltips, and errors if the types are violated) in most code editors.
+You'll notice that this doesn't require users to obey the type hint, but it does communicate what the function author expects. This will also provide extra details, such as autocomplete, hover tooltips, and error messages when types are violated, in most code editors, such as [VSCode](https://code.visualstudio.com/docs/editing/intellisense).
 
-A python type hint can be any valid data type, including compound types:
+## How Are Type Hints Used?
 
-```python
-class Grid:
-    def draw_point_at_coordinates(coords: tuple[int, int]):
-        x = coords[0]
-        y = coords[1]
-        ...
+In [a recent study](https://www.researchgate.net/profile/Joao-Montandon/publication/400405267_Understanding_Type_Hints_in_Python_Libraries_and_Frameworks_Early_Insights/links/698276c45d60ab48356a9f61/Understanding-Type-Hints-in-Python-Libraries-and-Frameworks-Early-Insights.pdf), researchers examined 152 of the top python repositories on [GitHub](https://github.com/search?q=language%3Apython+stars%3A%3E1000&type=Repositories&ref=advsearch&l=&l=&s=stars&o=desc) to assess how they used type hints. They found that 91% of these top repos used at least one type hint.
 
-my_grid = Grid()
-coords = (2, 3)
-my_grid.draw_point_at_coordinates(coords) # x = 2 and y = 3
-```
+That doesn't mean they were all used the same way. None of the repos use type hints on *every single function*. Most repos used type hints in only 13% of their code. The [openai-python](https://github.com/openai/openai-python) library used them the most, and they only type-hinted 61% of their code.
 
-Custom types and classes also work:
+They also found that the majority of these repos type-hinted functions, but almost none type-hinted variables:
 
 ```python
-def show_grid(grid: Grid):
-    ...
-
-my_grid.draw_point_at_coordinates((1, 1))
-show_grid(my_grid)
-# @...
-# ..@.
-# ....
-```
-
-## How are They Used?
-
-In [a recent study](https://www.researchgate.net/profile/Joao-Montandon/publication/400405267_Understanding_Type_Hints_in_Python_Libraries_and_Frameworks_Early_Insights/links/698276c45d60ab48356a9f61/Understanding-Type-Hints-in-Python-Libraries-and-Frameworks-Early-Insights.pdf),
-researchers looked at 152 of the top python repositories on [GitHub](https://github.com/search?q=language%3Apython+stars%3A%3E1000&type=Repositories&ref=advsearch&l=&l=&s=stars&o=desc) and looked at how they used type hints.
-
-They found that 91% of these top repos used at least one type hint.
-
-That doesn't mean they were all used the same way. None of the repos use type hints on *every single function*. Most repos only used type hints for 13% of their code. The [openai-python](https://github.com/openai/openai-python) library used them the most, and they only covered 61% of their code.
-
-The majority of these repos type hinted functions, but almost none type hinted variables:
-
-```python
-# Common:
+# Parameters and return values were commonly hinted (about 46% and 36%)
 def log_to_file(line: str) -> bool:
     logged_successfully = log(line, "my_log.txt")
     return logged_successfully
 
-# Uncommon:
+# Variable type hints were not as common (about 6%)
 links: list[str] = ["https://google.com/"]
 ```
 
-The types these repos hint also vary. Most type hints were builtins, less were local custom types, and almost none for external types.
+The types being hinted in these repos also vary. Most type hints were builtins, fewer were local custom types, and almost none were for external types.
 
 ```python
-# Common: type hinting builtins
-def log(line: str, level: int):
-    ...
+# Common: type hinting builtins (about 73% used these)
+def log(line: str, level: int): ...
 
+# Less common: type hinting custom types (about 20% used these)
+class Logger: ...
 
-# Less common: type hinting custom types
-class Logger:
-    ...
+class LoggerOptions: ...
 
-class LoggerOptions:
-    ...
+def create_logger(name: str, options: LoggerOptions) -> Logger: ...
 
-def create_logger(name: str, options: LoggerOptions) -> Logger:
-    ...
+# Least common: type hinting external types (about 4% used these)
+import requests
 
-
-# Least common: type hinting external types
-from openai import OpenAI
-
-def create_ai_logger(name: str, ai_instance: OpenAI) -> Logger:
-    ...
+def upload_log(log: str) -> requests.Response: ...
 
 ```
 
-## What's the Developer Experience With Them?
+## What Do Developers Think About Type Hints?
 
-While the study looked at where and how type hints were used, it doesn't include why a developer would use a type hint in one situation but not another.
-It also doesn't include what work goes into maintaining type hints, or any developer's opinions on working with type hints.
+While the study examined where and how type hints were used, it doesn't explain why a developer would use a type hint in one situation but not another. It also doesn't include what work goes into maintaining type hints, or any developer's opinions on working with type hints.
 
-I asked some friends of mine who've used python type hints in their libraries, and here's what they said:
+Here are the opinions of some Python developers on type hints:
 
-**Did you like them?**
+**Do you like type hints?**
 
-They loved them, and enjoyed the additional intellisense they provided.
+These developers unanimously love them and enjoy the benefits they provide. They pointed out the autocomplete, built-in warnings, and a reason to use them. One developer notes that type hints also made it easier to learn Python, coming from a different programming language.
 
-**What did you hint?**
+**What do you hint?**
 
-They all hinted every single method and function, but didn't hint variables.
+These developers type hint almost all of their hinted methods and functions, but don't hint variables. This is common among most popular Python repos.
 
 **Is hinting worth it?**
 
-They all agreed that it was and the amount of extra effort it takes is minimal.
+These developers all agree that it is, and the amount of extra effort it takes is minimal.
 
-**Is it more work to maintain?**
+**Are type hints more work to maintain?**
 
-On the contrary, they each brought up that it made it easier to maintain. They cited that type hints require less documentation, and that they make it easier to work in groups.
+These developers believe that type hints make it easier to maintain code. One says type hints require less documentation, and another notes that they make it easier to work in groups.
 
 {/* ## Paul
 
@@ -263,10 +218,8 @@ On the contrary, they each brought up that it made it easier to maintain. They c
 - Especially useful for projects you're working with others on, or if its a library (~3:10)
 - How often did you need to go back and change a type hint? Never so far. (~4:00) */}
 
-## TODO Present an Opinion
+Overall, these developers are big fans of type hints, and their experience with this syntax was very positive.
 
-TODO Conclusion
+## Conclusion
 
-{/* Write in second person ("you ...", "finally, you explored...")
-but not super concerned with what you think or feel, just
-talking. Think like a mechanic "here's your problem". */}
+In this article, you learned what Python type hints are, why they exist, how they're used, and why you might want to use them. This syntax is a powerful tool to improve the Python developer experience, enable collaboration, and avoid a whole category of bugs. You might even say that “15 seconds could save you 15 minutes or more on debugging.”
